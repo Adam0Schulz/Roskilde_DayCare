@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -20,7 +22,9 @@ public class DB_Connector {
     private static String password = "Ebberodes";
     private static PreparedStatement preparedStatement = null;
     private static PreparedStatement psInsert = null;
+    private static PreparedStatement ps = null;
     private static ResultSet resultSet = null;
+    private static ResultSet rs = null;
 
     // connection to database
     public static Connection connect() {
@@ -47,14 +51,14 @@ public class DB_Connector {
         stage.setTitle(title);
         stage.setScene(new Scene(root, 600, 400));
         stage.show();
-
     }
 
-    public static void login(ActionEvent event, String username, String password){
+    // Login method (needs adjustments)
+    public static void login(ActionEvent event, String email, String password){
         try {
             connect();
-            preparedStatement = connect.prepareStatement("SELECT password from users WHERE username = ?");
-            preparedStatement.setString(1, username);
+            preparedStatement = connect.prepareStatement("SELECT password from Daycare.Employees WHERE email_address = ?");
+            preparedStatement.setString(1, email);
             resultSet = preparedStatement.executeQuery();
 
             if(resultSet.isBeforeFirst()) {
@@ -67,7 +71,7 @@ public class DB_Connector {
                     if (retrievedPassword.equals(password)) {
                         changeScene(event, "logged-in.fxml", "Welcome!");
                     } else {
-                       // System.out.println("Password didnt match");
+                        // System.out.println("Password didnt match");
                         Alert alert = new Alert(Alert.AlertType.ERROR, "Password doesn't match. Try again.");
                         alert.show();
                     }
@@ -80,25 +84,27 @@ public class DB_Connector {
         }
     }
 
+    // Method to create Employee objects from database
     public static Collection<Employee> employeeList() {
         Collection<Employee> employees = new ArrayList<Employee>();
 
         try {
             connect();
-            preparedStatement = connect.prepareStatement("SELECT first_name, last_name, email_address, address, zip_code, city, phone_number, salary, CPR FROM Daycare.Employees");
+            preparedStatement = connect.prepareStatement("SELECT first_name, last_name, email_address, street, zip_code, city, phone_number, salary, CPR, password FROM Daycare.Employees");
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()) {
                 String firstName = resultSet.getString("first_name");
                 String lastName = resultSet.getString("last_name");
                 String email = resultSet.getString("email_address");
-                String address = resultSet.getString("address");
+                String street = resultSet.getString("street");
                 int zip = resultSet.getInt("zip_code");
                 String city = resultSet.getString("city");
                 String phoneNumber = resultSet.getString("phone_number");
                 Float salary = resultSet.getFloat("salary");
                 String CPR = resultSet.getString("CPR");
-                employees.add(new Employee(firstName, lastName, email, address, zip, city, phoneNumber, salary, CPR));
+                String password = resultSet.getString("password");
+                employees.add(new Employee(firstName, lastName, email, street, zip, city, phoneNumber, salary, CPR, password));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -107,70 +113,141 @@ public class DB_Connector {
         } return employees;
     }
 
-    public static Collection<Child> waitingList() {
-        Collection<Child> children = new ArrayList<Child>();
+    // Method to create Queuer objects from database
+    public static Collection<Queuer> waitingList() {
+        Collection<Queuer> waitingList = new ArrayList<Queuer>();
 
         try {
             connect();
-            preparedStatement = connect.prepareStatement("SELECT first_name, last_name, queue_number, CPR, date_of_birth, gender FROM Daycare.Children");
+
+
+            preparedStatement = connect.prepareStatement("SELECT c.first_name, c.last_name, c.parent_ID, c.CPR, c.date_of_birth, c.gender, w.Timestamp FROM Daycare.Children c JOIN Daycare.Waiting_list w ON c.ID = w.Child_ID");
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()) {
                 String firstName = resultSet.getString("first_name");
                 String lastName = resultSet.getString("last_name");
-                String queueNumber = resultSet.getString("queue_number");
+                int parentID = resultSet.getInt("parent_ID");
                 String CPR = resultSet.getString("CPR");
                 Date dateOfBirth = resultSet.getDate("date_of_birth");
                 String gender = resultSet.getString("gender");
+                Timestamp time = resultSet.getTimestamp("Timestamp");
+                //String time = resultSet.getString("Timestamp");
+                //LocalDateTime date = LocalDateTime.parse(time);
 
-                children.add(new Child(firstName, lastName, queueNumber, CPR, dateOfBirth, gender));
+                preparedStatement = connect.prepareStatement("SELECT first_name, last_name, email_address, street, zip_code, city, phone_number FROM Daycare.Parents WHERE ID = ?");
+                preparedStatement.setInt(1, parentID);
+                rs = preparedStatement.executeQuery();
+
+                com.example.roskilde_daycare.Parent parent = null;
+
+                if (rs.next()) {
+                    String firstN = rs.getString("first_name");
+                    String lastN = rs.getString("last_name");
+                    String email = rs.getString("email_address");
+                    String street = rs.getString("street");
+                    int zip = rs.getInt("zip_code");
+                    String city = rs.getString("city");
+                    String phone = rs.getString("phone_number");
+
+                    parent = new com.example.roskilde_daycare.Parent(firstN, lastN, email, street, zip, city, phone);
+                }
+
+                waitingList.add(new Queuer(firstName, lastName, dateOfBirth, gender, parent, time, CPR ));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
-        } return children;
+        } return waitingList;
     }
 
-    public static Collection<Parent> parentList() {
-        Collection<Parent> parents = new ArrayList<Parent>();
+    // Method to create Attendee objects from database
+    public static Collection<Attendee> attendeeList(){
+        Collection<Attendee> attendees = new ArrayList<Attendee>();
 
         try {
             connect();
-            preparedStatement = connect.prepareStatement("SELECT first_name, last_name, email_address, address, zip_code, city, phone_number FROM Daycare.Parents");
+            preparedStatement = connect.prepareStatement("SELECT c.first_name, c.last_name, c.parent_ID, c.CPR, c.date_of_birth, c.gender, g.name FROM Daycare.Children c JOIN Daycare.Attendees a ON c.ID = a.child_ID JOIN Daycare.Classes g ON a.group_ID = g.ID");
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()) {
                 String firstName = resultSet.getString("first_name");
                 String lastName = resultSet.getString("last_name");
-                String email = resultSet.getString("email_address");
-                String address = resultSet.getString("address");
-                int zip = resultSet.getInt("zip_code");
-                String city = resultSet.getString("city");
-                String phoneNumber = resultSet.getString("phone_number");
+                int parentID = resultSet.getInt("parent_ID");
+                String CPR = resultSet.getString("CPR");
+                Date dateOfBirth = resultSet.getDate("date_of_birth");
+                String gender = resultSet.getString("gender");
+                String groupName = resultSet.getString("name");
 
-                parents.add(new Parent(firstName, lastName, email, address, zip, city, phoneNumber));
+
+                preparedStatement = connect.prepareStatement("SELECT first_name, last_name, email_address, street, zip_code, city, phone_number FROM Daycare.Parents WHERE ID = ?");
+                preparedStatement.setInt(1, parentID);
+                rs = preparedStatement.executeQuery();
+
+                com.example.roskilde_daycare.Parent parent = null;
+
+                if (rs.next()) {
+                    String firstN = rs.getString("first_name");
+                    String lastN = rs.getString("last_name");
+                    String email = rs.getString("email_address");
+                    String street = rs.getString("street");
+                    int zip = rs.getInt("zip_code");
+                    String city = rs.getString("city");
+                    String phone = rs.getString("phone_number");
+
+                    parent = new com.example.roskilde_daycare.Parent(firstN, lastN, email, street, zip, city, phone);
+                }
+
+                attendees.add(new Attendee(firstName, lastName, dateOfBirth, gender, parent, groupName, CPR));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
-        } return parents;
+        } return attendees;
     }
 
-    public static void addEmployee(String firstName, String lastName, String email, String address, int zip, String city, String phone, float salary){
+    // not needed at the moment
+//    public static Collection<com.example.roskilde_daycare.Parent> parentList() {
+//        Collection<com.example.roskilde_daycare.Parent> parents = new ArrayList<>();
+//
+//        try {
+//            connect();
+//            preparedStatement = connect.prepareStatement("SELECT first_name, last_name, email_address, street, zip_code, city, phone_number FROM Daycare.Parents");
+//            resultSet = preparedStatement.executeQuery();
+//
+//            while(resultSet.next()) {
+//                String firstName = resultSet.getString("first_name");
+//                String lastName = resultSet.getString("last_name");
+//                String email = resultSet.getString("email_address");
+//                String street = resultSet.getString("street");
+//                int zip = resultSet.getInt("zip_code");
+//                String city = resultSet.getString("city");
+//                String phoneNumber = resultSet.getString("phone_number");
+//
+//                parents.add(new com.example.roskilde_daycare.Parent(firstName, lastName, email, street, zip, city, phoneNumber));
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            closeConnection();
+//        } return parents;
+//    }
+
+    // Method to add employee to the database (tested, works)
+    public static void addEmployee(String firstName, String lastName, String email, String address, int zip, String city, String phone, float salary, String CPR, String password){
         try {
             connect();
-            preparedStatement = connect.prepareStatement("SELECT  * from Daycare.Employees where first_name  = ? AND last_name = ?");
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
+            preparedStatement = connect.prepareStatement("SELECT  * from Daycare.Employees where CPR  = ?");
+            preparedStatement.setString(1, CPR);
             resultSet = preparedStatement.executeQuery();
 
             if(resultSet.isBeforeFirst()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Employee " + firstName + " " + lastName + "already exists.");
                 alert.show();
             } else {
-                psInsert = connect.prepareStatement("INSERT INTO Daycare.Employees(first_name, last_name, email_address, address, zip_code, city, phone_number, salary) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                psInsert = connect.prepareStatement("INSERT INTO Daycare.Employees(first_name, last_name, email_address, street, zip_code, city, phone_number, salary, CPR, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 psInsert.setString(1, firstName);
                 psInsert.setString(2, lastName);
                 psInsert.setString(3, email);
@@ -179,9 +256,10 @@ public class DB_Connector {
                 psInsert.setString(6, city);
                 psInsert.setString(7, phone);
                 psInsert.setFloat(8, salary);
+                psInsert.setString(9, CPR);
+                psInsert.setString(10, password);
                 psInsert.executeUpdate();
-
-                // should we create an object and add it to the array?
+                System.out.println("Employee has been added.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -190,14 +268,41 @@ public class DB_Connector {
         }
     }
 
-    public static void deleteEmployee(String firstName, String lastname) {
+    // Method to add a child to the Children table and Waiting list (tested, works)
+    public static void addChild(String firstName, String lastName, Date dateOfBirth, String gender, String CPR){
         try {
-            // do we first need to check if it exists?
             connect();
-            preparedStatement = connect.prepareStatement("DELETE FROM Daycare.Employees WHERE first_name = ? AND last_name = ?");
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastname);
-            preparedStatement.executeUpdate();
+            // checking if child already exists
+            preparedStatement = connect.prepareStatement("SELECT  * from Daycare.Children where CPR  = ?");
+            preparedStatement.setString(1, CPR);
+            resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.isBeforeFirst()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Child " + firstName + " " + lastName + "already exists.");
+                alert.show();
+            } else {
+                psInsert = connect.prepareStatement("INSERT INTO Daycare.Children(first_name, last_name, date_of_birth, gender, CPR) VALUES (?, ?, ?, ?, ?)");
+                psInsert.setString(1, firstName);
+                psInsert.setString(2, lastName);
+                psInsert.setDate(3, dateOfBirth);
+                psInsert.setString(4, gender);
+                psInsert.setString(5, CPR);
+                psInsert.executeUpdate();
+
+                preparedStatement = connect.prepareStatement("SELECT ID FROM Daycare.Children WHERE CPR = ?");
+                preparedStatement.setString(1, CPR);
+                resultSet = preparedStatement.executeQuery();
+
+                int childID = 0;
+                if(resultSet.next()){
+                    childID = resultSet.getInt("ID");
+                }
+
+                psInsert = connect.prepareStatement("INSERT INTO Daycare.Waiting_list(Child_ID) VALUES (?)");
+                psInsert.setInt(1, childID);
+                psInsert.executeUpdate();
+                System.out.println("Child has been added.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -205,14 +310,25 @@ public class DB_Connector {
         }
     }
 
-    // delete child
-    // delete parent
+    // Method to delete employee from the database (tested, works)
+    public static void deleteEmployee(String CPR) {
+        try {
+            // first check if exists
+            connect();
+            preparedStatement = connect.prepareStatement("DELETE FROM Daycare.Employees WHERE CPR = ?");
+            preparedStatement.setString(1, CPR);
+            preparedStatement.executeUpdate();
+            System.out.println("Employee has been deleted.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+
+    // delete child and child
     // transfer child from waiting list to attendees
-
-
-
-
-
 
     private static void closeConnection() {
         if (resultSet != null) {

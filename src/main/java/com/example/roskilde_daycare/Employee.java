@@ -10,8 +10,9 @@ public class Employee {
     private String phoneNumber;
     private float salary;
     private String CPR;
+    private String password;
 
-    public Employee(String firstName, String lastName, String email, String address, int zip, String city, String phoneNumber, float salary, String CPR) {
+    public Employee(String firstName, String lastName, String email, String address, int zip, String city, String phoneNumber, float salary, String CPR, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -21,5 +22,6 @@ public class Employee {
         this.phoneNumber = phoneNumber;
         this.salary = salary;
         this.CPR = CPR;
+        this.password = password;
     }
 }

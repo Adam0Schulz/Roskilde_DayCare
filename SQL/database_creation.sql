@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Children (
     last_name varchar(1000),
     parent_ID int(7),
     date_of_birth date,
-    CPR varchar(10),
+    CPR varchar(10) NOT NULL,
     gender char(1) CHECK ( gender = 'M' OR gender = 'F'),
     FOREIGN KEY (parent_ID) REFERENCES Parents(ID)
     );
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS Employees (
     city varchar(100),
     phone_number varchar(15),
     salary float(6),
-    CPR varchar(10),
+    CPR varchar(10) NOT NULL,
     password varchar(255)
     );
 

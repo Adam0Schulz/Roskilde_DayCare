@@ -268,7 +268,7 @@ public class DB_Connector {
         }
     }
 
-    // Method to add a child to the Children table and Waiting list (tested, works)
+    // Method to add a child to the Children table and Waiting list (tested, works, but later when we create a parent, it needs a connection to the child that we are creating, in order to get parentID)
     public static void addChild(String firstName, String lastName, Date dateOfBirth, String gender, String CPR){
         try {
             connect();
@@ -310,10 +310,30 @@ public class DB_Connector {
         }
     }
 
+    // Method to add a parent to Parents table (tested, works)
+    public static void addParent(String firstName, String lastName, String email, String street, int zip, String city, String phone){
+        try {
+            connect();
+            psInsert = connect.prepareStatement("INSERT INTO Daycare.Parents(first_name, last_name, email_address, street, zip_code, city, phone_number) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            psInsert.setString(1, firstName);
+            psInsert.setString(2, lastName);
+            psInsert.setString(3, email);
+            psInsert.setString(4, street );
+            psInsert.setInt(5, zip);
+            psInsert.setString(6, city);
+            psInsert.setString(7,phone);
+            psInsert.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
     // Method to delete employee from the database (tested, works)
+
     public static void deleteEmployee(String CPR) {
         try {
-            // first check if exists
+            // first check if exists - needs to be added
             connect();
             preparedStatement = connect.prepareStatement("DELETE FROM Daycare.Employees WHERE CPR = ?");
             preparedStatement.setString(1, CPR);
@@ -327,7 +347,22 @@ public class DB_Connector {
     }
 
 
-    // delete child and child
+    // delete child and parent (tested, works)
+    public static void deleteChildAndParent(String CPR) {
+        try {
+            connect();
+            // deletes child with given CPR
+            preparedStatement = connect.prepareStatement("DELETE c, p FROM Daycare.Children c JOIN Daycare.Parents p ON c.parent_ID = p.ID WHERE c.CPR = ?");
+            preparedStatement.setString(1, CPR);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
     // transfer child from waiting list to attendees
 
     private static void closeConnection() {

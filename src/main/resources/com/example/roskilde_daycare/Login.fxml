@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="747.0" prefWidth="1327.0" style="-fx-background-color: #0075A3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.roskilde_daycare.Controllers.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="747.0" prefWidth="1327.0" style="-fx-background-color: #0075A3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.roskilde_daycare.LoginController">
    <children>
       <BorderPane prefHeight="747.0" prefWidth="1327.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -97,6 +97,9 @@
                                  <font>
                                     <Font name="Segoe UI" size="18.0" />
                                  </font>
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                 </padding>
                               </TextField>
                               <Label alignment="CENTER" prefHeight="17.0" prefWidth="204.0" text="Password" textFill="#aadeee">
                                  <font>
@@ -107,13 +110,16 @@
                                  <font>
                                     <Font name="Segoe UI" size="18.0" />
                                  </font>
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                 </padding>
                               </PasswordField>
                            </children>
                         </VBox>
                      </center></BorderPane>
                   <BorderPane prefHeight="108.0" prefWidth="1327.0">
                      <center>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: #AADEEE; -fx-background-radius: 50px;" text="Login" textFill="WHITE" BorderPane.alignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#onLoginClick" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: #AADEEE; -fx-background-radius: 50px;" text="Login" textFill="WHITE" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>

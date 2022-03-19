@@ -1,16 +1,11 @@
-package com.example.roskilde_daycare.Controllers;
+package com.example.roskilde_daycare;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-public class LoginController {
+public class PupilsController {
 
     private double x,y;
 
@@ -40,7 +35,6 @@ public class LoginController {
     protected void onMaximizeClick(MouseEvent event) {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         if( stage.isMaximized() ) {
-            System.out.println("idontknowwhattodoatthispoint");
             stage.setMaximized(false);
         } else {
             stage.setMaximized(true);
@@ -54,14 +48,4 @@ public class LoginController {
         stage.setIconified(true);
     }
 
-    @FXML
-    protected void onLoginClick(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Pupils.fxml"));
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
-
-    }
 }

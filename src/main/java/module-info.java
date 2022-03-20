@@ -1,4 +1,4 @@
-module com.example.pojebana_skuska {
+module com.example.roskilde_daycare {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;

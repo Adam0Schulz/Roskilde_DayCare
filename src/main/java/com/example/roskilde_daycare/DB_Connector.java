@@ -56,6 +56,7 @@ public class DB_Connector {
         stage.show();
     }
 
+
     // Login method (needs adjustments)
     public static void login(ActionEvent event, String email, String password){
         try {

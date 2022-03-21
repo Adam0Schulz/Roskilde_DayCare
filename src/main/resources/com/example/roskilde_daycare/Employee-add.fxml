@@ -206,7 +206,7 @@
                      <children>
                         <BorderPane prefHeight="306.0" prefWidth="977.0">
                            <center>
-                              <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="167.0" prefWidth="977.0" spacing="25.0" BorderPane.alignment="CENTER">
+                              <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="196.0" prefWidth="977.0" spacing="25.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0" spacing="65.0">
                                        <children>
@@ -217,7 +217,7 @@
                                                       <Font name="Segoe UI" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;">
+                                                <TextField fx:id="firstName" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;">
                                                    <font>
                                                       <Font name="Segoe UI" size="12.0" />
                                                    </font>
@@ -231,7 +231,7 @@
                                                       <Font name="Segoe UI" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
+                                                <TextField fx:id="lastName" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" layoutX="110.0" layoutY="10.0" prefHeight="100.0" prefWidth="100.0">
@@ -241,7 +241,7 @@
                                                       <Font name="Segoe UI" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
+                                                <TextField fx:id="street" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" layoutX="210.0" layoutY="10.0" prefHeight="100.0" prefWidth="100.0">
@@ -251,7 +251,7 @@
                                                       <Font name="Segoe UI" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
+                                                <TextField fx:id="city" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -265,7 +265,7 @@
                                                       <Font name="Segoe UI" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
+                                                <TextField fx:id="email" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="100.0">
@@ -275,7 +275,7 @@
                                                       <Font name="Segoe UI" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
+                                                <TextField fx:id="phone" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" layoutX="110.0" layoutY="10.0" prefHeight="100.0" prefWidth="100.0">
@@ -285,7 +285,7 @@
                                                       <Font name="Segoe UI" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
+                                                <TextField fx:id="zip" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" layoutX="210.0" layoutY="10.0" prefHeight="100.0" prefWidth="100.0">
@@ -295,8 +295,25 @@
                                                       <Font name="Segoe UI" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
+                                                <TextField fx:id="salary" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
                                              </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" layoutX="10.0" layoutY="105.0" prefHeight="70.0" prefWidth="200.0" spacing="65.0">
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="108.0" prefWidth="100.0">
+                                             <children>
+                                                <Label text="CPR">
+                                                   <font>
+                                                      <Font name="Segoe UI" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="CPR" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets right="570.0" />
+                                             </HBox.margin>
                                           </VBox>
                                        </children>
                                     </HBox>

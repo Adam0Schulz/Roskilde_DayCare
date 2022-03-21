@@ -1,9 +1,2 @@
 .idea/
 
-src/main/java/module-info.java
-
-target
-
-pom.xml
-
-*.iml

@@ -1,5 +1,6 @@
 package com.example.roskilde_daycare;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 public class DB_Connector {
     private static Connection connect = null;
@@ -40,10 +42,10 @@ public class DB_Connector {
         } return connect;
     }
 
-    public static void changeScene(ActionEvent event, String fxmlFile, String title){
+    public static void changeScene(Event event, String fxmlFile, String title){
         Parent root = null;
         try {
-            root = FXMLLoader.load(DB_Connector.class.getResource(fxmlFile));
+            root = FXMLLoader.load(Objects.requireNonNull(DB_Connector.class.getResource(fxmlFile)));
         } catch (IOException e) {
             e.printStackTrace();
         }

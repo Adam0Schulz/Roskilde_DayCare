@@ -22,7 +22,7 @@ public class DB_Connector {
     private static String database;
     private static String url = "jdbc:mysql://localhost:3306/Daycare";
     private static String user = "root";
-    private static String password = "Ebberodes";
+    private static String password = "";
     private static PreparedStatement preparedStatement = null;
     private static PreparedStatement psInsert = null;
     private static PreparedStatement ps = null;

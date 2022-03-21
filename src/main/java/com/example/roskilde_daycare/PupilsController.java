@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class PupilsController extends CustomStage {
 
-
+/*
      protected void onAddButtonClick(ActionEvent event) {
          Parent root = null;
          try {
@@ -32,6 +32,6 @@ public class PupilsController extends CustomStage {
          stage.setScene(new Scene(root, 1327, 747));
          stage.show();
 
-     }
+     }*/
 
 }

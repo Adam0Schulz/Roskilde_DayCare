@@ -186,7 +186,7 @@
                                     </ImageView>
                                  </children>
                               </HBox>
-                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonClick" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #0075A3; -fx-background-radius: 50px;" text="ADD" textFill="WHITE">
+                              <Button fx:id="addButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #0075A3; -fx-background-radius: 50px;" text="ADD" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Bold" size="14.0" />
                                  </font>

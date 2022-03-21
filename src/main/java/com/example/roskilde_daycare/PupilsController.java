@@ -5,6 +5,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,14 +22,5 @@ import java.util.ResourceBundle;
 
 public class PupilsController extends CustomStage {
 
-    @FXML
-    private Button addButton;
 
-
-// not working
-   @FXML
-    protected void addButtonClick(Event event) {
-       DB_Connector.changeScene(event, "WaitingList.fxml", "Waiting List");
-
-   }
 }

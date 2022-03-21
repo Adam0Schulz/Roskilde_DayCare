@@ -14,24 +14,21 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
+
 
 public class PupilsController extends CustomStage {
 
-/*
-     protected void onAddButtonClick(ActionEvent event) {
-         Parent root = null;
-         try {
-             root = FXMLLoader.load(Objects.requireNonNull(DB_Connector.class.getResource("WaitingList.fxml")));
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
+    @FXML
+    private Button addButton;
 
-         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-         stage.setTitle("Waiting List");
-         stage.setScene(new Scene(root, 1327, 747));
-         stage.show();
 
-     }*/
+// not working
+   @FXML
+    protected void addButtonClick(Event event) {
+       DB_Connector.changeScene(event, "WaitingList.fxml", "Waiting List");
 
+   }
 }

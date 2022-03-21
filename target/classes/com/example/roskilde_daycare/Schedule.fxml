@@ -20,7 +20,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="747.0" prefWidth="1327.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.roskilde_daycare.PupilsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="747.0" prefWidth="1327.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.roskilde_daycare.ScheduleController">
    <children>
       <VBox layoutY="-85.0" prefHeight="832.0" prefWidth="203.0" style="-fx-background-color: #0075A3; -fx-background-radius: 0 20px 20px 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="-85.0">
          <children>
@@ -44,7 +44,7 @@
                <center>
                   <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="120.0" spacing="30.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="209.0" text="Pupils" textFill="WHITE">
+                        <Label onMouseClicked="#onPupilsClick" prefHeight="17.0" prefWidth="209.0" text="Pupils" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Bold" size="18.0" />
                            </font>
@@ -55,7 +55,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
-                        <Label prefHeight="17.0" prefWidth="210.0" styleClass="active_subHeading" stylesheets="@CSS/Style.css" text="Schedule" textFill="#0075a3">
+                        <Label onMouseClicked="#onScheduleClick" prefHeight="17.0" prefWidth="210.0" styleClass="active_subHeading" stylesheets="@CSS/Style.css" text="Schedule" textFill="#0075a3">
                            <font>
                               <Font name="Segoe UI Bold" size="18.0" />
                            </font>
@@ -63,7 +63,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
-                        <Label prefHeight="17.0" prefWidth="205.0" text="Waiting list" textFill="WHITE">
+                        <Label onMouseClicked="#onWaitingListClick" prefHeight="17.0" prefWidth="205.0" text="Waiting list" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Bold" size="18.0" />
                            </font>
@@ -71,7 +71,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
-                        <Label prefHeight="17.0" prefWidth="210.0" text="Employees" textFill="WHITE">
+                        <Label onMouseClicked="#onEmployeesClick" prefHeight="17.0" prefWidth="210.0" text="Employees" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Bold" size="18.0" />
                            </font>

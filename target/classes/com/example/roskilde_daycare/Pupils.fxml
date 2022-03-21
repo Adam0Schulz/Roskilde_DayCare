@@ -42,7 +42,7 @@
                <center>
                   <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="120.0" spacing="30.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="209.0" text="Pupils" textFill="#0075a3">
+                        <Label onMouseClicked="#onPupilsClick" prefHeight="17.0" prefWidth="209.0" text="Pupils" textFill="#0075a3">
                            <font>
                               <Font name="Segoe UI Bold" size="18.0" />
                            </font>

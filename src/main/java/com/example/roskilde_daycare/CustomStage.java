@@ -1,5 +1,6 @@
 package com.example.roskilde_daycare;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
@@ -38,7 +39,6 @@ public class CustomStage {
         } else {
             stage.setMaximized(true);
         }
-
     }
 
     @FXML
@@ -46,4 +46,26 @@ public class CustomStage {
         javafx.stage.Stage stage = (javafx.stage.Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
+
+    @FXML
+    protected void onPupilsClick(Event event){
+        DB_Connector.changeScene(event, "Pupils.fxml", "Pupils");
+    }
+
+    @FXML
+    protected void onScheduleClick(Event event){
+        DB_Connector.changeScene(event, "Schedule.fxml", "Schedule");
+    }
+
+    @FXML
+    protected void onWaitingListClick(Event event) {
+        DB_Connector.changeScene(event, "WaitingList.fxml", "Waiting List");
+    }
+
+    @FXML
+    protected void onEmployeesClick(Event event) {
+        DB_Connector.changeScene(event, "Employees.fxml", "Employees");
+    }
+
+
 }

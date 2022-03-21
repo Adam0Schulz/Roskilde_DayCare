@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class DB_Connector {
     private static ResultSet resultSet = null;
     private static ResultSet rs = null;
 
-    // connection to database
+    // connection to databasedk
     public static Connection connect() {
         System.out.println("Connecting to JDBC");
         System.out.println("Connecting to DBMS");
@@ -49,7 +50,7 @@ public class DB_Connector {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle(title);
-        stage.setScene(new Scene(root, 600, 400));
+        stage.setScene(new Scene(root, 1327, 747));
         stage.show();
     }
 
@@ -61,7 +62,7 @@ public class DB_Connector {
             preparedStatement.setString(1, email);
             resultSet = preparedStatement.executeQuery();
 
-            if(resultSet.isBeforeFirst()) {
+            if(!resultSet.isBeforeFirst()) {
                 //System.out.println("User not found");
                 Alert alert = new Alert(Alert.AlertType.ERROR, "User not found");
                 alert.show();

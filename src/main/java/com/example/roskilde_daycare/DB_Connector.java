@@ -69,10 +69,10 @@ public class DB_Connector {
                 while (resultSet.next()) {
                     String retrievedPassword = resultSet.getString("password");
                     if (retrievedPassword.equals(password)) {
-                        changeScene(event, "logged-in.fxml", "Welcome!");
+                        changeScene(event, "Pupils.fxml", "Welcome!");
                     } else {
                         // System.out.println("Password didnt match");
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "Password doesn't match. Try again.");
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "Password doesn't match.");
                         alert.show();
                     }
                 }

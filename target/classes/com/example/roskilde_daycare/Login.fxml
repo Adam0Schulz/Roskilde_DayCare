@@ -90,7 +90,7 @@
                                     <Insets top="20.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField promptText="name@surname.com" style="-fx-background-radius: 50px; -fx-background-color: #298BB2; -fx-color: #FFFFFF;">
+                              <TextField fx:id="userEmail" promptText="name@surname.com" style="-fx-background-radius: 50px; -fx-background-color: #298BB2; -fx-color: #FFFFFF;">
                                  <VBox.margin>
                                     <Insets bottom="25.0" />
                                  </VBox.margin>
@@ -106,7 +106,7 @@
                                     <Font name="Segoe UI" size="20.0" />
                                  </font>
                               </Label>
-                              <PasswordField promptText="••••••" style="-fx-background-radius: 50px; -fx-background-color: #298BB2; -fx-color: #FFFFFF;">
+                              <PasswordField fx:id="userPassword" promptText="••••••" style="-fx-background-radius: 50px; -fx-background-color: #298BB2; -fx-color: #FFFFFF;">
                                  <font>
                                     <Font name="Segoe UI" size="18.0" />
                                  </font>

@@ -164,7 +164,7 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="243.0">
                                  <children>
-                                    <TextField prefHeight="35.0" prefWidth="221.0" style="-fx-background-radius: 50px; -fx-background-color: #FFFFFF;">
+                                    <TextField maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="378.0" style="-fx-background-radius: 50px; -fx-background-color: #FFFFFF;">
                                        <font>
                                           <Font name="Segoe UI" size="18.0" />
                                        </font>
@@ -207,7 +207,7 @@
                   </HBox>
                   <Pane maxHeight="-Infinity" prefHeight="521.0" prefWidth="200.0" style="-fx-background-radius: 50px; -fx-background-color: white;">
                      <children>
-                        <VBox prefHeight="479.0" prefWidth="978.0">
+                        <VBox prefHeight="475.0" prefWidth="976.0">
                            <children>
                               <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="42.0" prefWidth="200.0" spacing="50.0" style="-fx-background-color: #FBD3D6; -fx-background-radius: 50px 50px 0 0;">
                                  <children>
@@ -241,7 +241,7 @@
                                     <Insets left="50.0" />
                                  </padding>
                               </HBox>
-                              <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="438.0" prefWidth="977.0" style="-fx-border-color: white; -fx-outline: white;" vbarPolicy="NEVER">
+                              <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="438.0" prefWidth="976.0" style="-fx-border-color: white; -fx-outline: white; -fx-background-color: white;" vbarPolicy="NEVER">
                                  <content>
                                     <VBox blendMode="SRC_ATOP" prefHeight="707.0" prefWidth="977.0" style="-fx-background-color: white;">
                                        <children>

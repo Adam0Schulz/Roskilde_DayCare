@@ -37,7 +37,7 @@ public class LoginController extends CustomStage {
     }
 
     @FXML
-    protected void onLoginClick(ActionEvent event) throws IOException {
+    protected void onLoginClick(ActionEvent event) {
 
         DB_Connector.login(event, userEmail.getText(), userPassword.getText());
 

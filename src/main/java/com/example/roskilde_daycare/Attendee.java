@@ -10,4 +10,12 @@ public class Attendee extends Child {
         super(firstName, lastName, dateOfBirth, gender, parent, CPR);
         this.group = group;
     }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
 }

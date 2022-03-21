@@ -268,7 +268,7 @@ public class DB_Connector {
         }
     }
 
-    // Method to add a child to the Children table and Waiting list (tested, works, but later when we create a parent, it needs a connection to the child that we are creating, in order to get parentID)
+    // Method to add a child to the Children table and Waiting list (tested, works, method addParent returns Parent and has to be used to get parent´s ID)
     public static void addChild(String firstName, String lastName, Date dateOfBirth, String gender, String CPR){
         try {
             connect();
@@ -311,7 +311,8 @@ public class DB_Connector {
     }
 
     // Method to add a parent to Parents table (tested, works)
-    public static void addParent(String firstName, String lastName, String email, String street, int zip, String city, String phone){
+    public static com.example.roskilde_daycare.Parent addParent(String firstName, String lastName, String email, String street, int zip, String city, String phone){
+        com.example.roskilde_daycare.Parent parent = null;
         try {
             connect();
             psInsert = connect.prepareStatement("INSERT INTO Daycare.Parents(first_name, last_name, email_address, street, zip_code, city, phone_number) VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -322,15 +323,17 @@ public class DB_Connector {
             psInsert.setInt(5, zip);
             psInsert.setString(6, city);
             psInsert.setString(7,phone);
+
+            parent = new com.example.roskilde_daycare.Parent(firstName, lastName, email, street, zip, city, phone);
+
             psInsert.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
-        }
+        } return parent;
     }
     // Method to delete employee from the database (tested, works)
-
     public static void deleteEmployee(String CPR) {
         try {
             // first check if exists - needs to be added
@@ -363,7 +366,42 @@ public class DB_Connector {
         }
     }
 
+
+    // update child and parent
+
+
+    // view schedule
+    // update schedule
+    // delete schedule
+
+
     // transfer child from waiting list to attendees
+    // delete child from queuers and add to attendees
+    // INSERT INTO table_name1(fields you want)
+    //  SELECT fields you want FROM table_name2
+    public static void transferChild(String CPR, String group) {
+        try {
+            connect();
+            // deletes child from queuers based on CPR
+            preparedStatement = connect.prepareStatement("DELETE w FROM Daycare.Waiting_list w JOIN Daycare.Children c ON c.ID = w.Child_ID WHERE c.CPR = ?");
+            preparedStatement.setString(1, CPR);
+            preparedStatement.executeUpdate();
+
+            // finds group´s ID
+            //preparedStatement = connect.prepareStatement()
+
+            // adds child to attendees
+            psInsert = connect.prepareStatement("INSERT INTO Daycare.Attendees(child_ID) SELECT c.ID FROM Daycare.Children c WHERE c.CPR = ?;");
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+
 
     private static void closeConnection() {
         if (resultSet != null) {

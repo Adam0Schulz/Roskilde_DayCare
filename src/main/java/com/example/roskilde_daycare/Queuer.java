@@ -12,4 +12,12 @@ public class Queuer extends Child{
         super(firstName, lastName, dateOfBirth, gender, parent, CPR);
         this.time = time;
     }
+
+    public Timestamp getTime() {
+        return time;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
 }

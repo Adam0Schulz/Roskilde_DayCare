@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.sql.Date;
 import java.util.Objects;
 
 
@@ -23,8 +24,9 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        //launch();
         //DB_Connector.connect();
+        DB_Connector.addChild("Charlie", "Kardel", Date.valueOf("2021-02-10"), "M", "0611942842");
         //DB_Connector.addParent("Charlie", "Kardel", "charlie@gmail.com", "dkdkdk", 2200, "Copenhagen", "8484848");
         //DB_Connector.deleteChildAndParent("0611947373");
 

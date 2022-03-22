@@ -29,8 +29,8 @@ public class PupilsController extends CustomStage {
     @FXML
     private VBox PupilList;
 
-    public ArrayList<HBox> getPupilList () {
-        ArrayList<HBox> list = new ArrayList<HBox>();
+    public ArrayList<VBox> getPupilList () {
+        ArrayList<VBox> list = new ArrayList<VBox>();
         Collection<Attendee> pupils = DB_Connector.attendeeList();
         for(Attendee pupil : pupils) {
             ArrayList<String> pupilInfo = new ArrayList<String>();
@@ -39,7 +39,7 @@ public class PupilsController extends CustomStage {
             pupilInfo.add(pupil.getGroup());
             pupilInfo.add(pupil.getFirstName());
             pupilInfo.add(pupil.getFirstName());
-            list.add(DynamicElements.createListItem(pupilInfo));
+            list.add(DynamicElements.createListItem(pupilInfo, pupilInfo));
         }
         return list;
     }

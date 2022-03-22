@@ -419,8 +419,9 @@ public class DB_Connector {
     } return activeSchedule;
     }
 
-    public static void addEmployeeAssignment(String groupName, Time startTime, Time endTime, String day, String employeeName){
-        try {
+    public static int createSchedule(){
+        int scheduleID = 0;
+        try{
             connect();
             // find which one is active first, set to false
             preparedStatement = connect.prepareStatement("UPDATE Daycare.Schedule SET active = ? WHERE active = ?");
@@ -436,10 +437,20 @@ public class DB_Connector {
             preparedStatement.setBoolean(1,true);
             rs = preparedStatement.executeQuery();
 
-            int scheduleID = 0;
             while(rs.next()){
                 scheduleID = rs.getInt("ID");
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        } return scheduleID;
+    }
+
+    // Have to pass in the schedule ID from method createSchedule
+    public static void addEmployeeAssignment(String groupName, Time startTime, Time endTime, String day, String employeeName, int scheduleID){
+        try {
+            connect();
             // gets employeeID based on name
             String[] array = employeeName.split(" ", 2);
             String firstName = array[0];
@@ -464,7 +475,15 @@ public class DB_Connector {
                 groupID = rs.getInt("ID");
             }
 
+            // inserts new employee assignment
             psInsert = connect.prepareStatement("INSERT INTO Daycare.Employee_assigment (schedule_ID, employee_ID, group_ID, start_time, end_time, day) VALUES (?, ?, ?, ?, ?, ?)");
+            psInsert.setInt(1, scheduleID);
+            psInsert.setInt(2,employeeID);
+            psInsert.setInt(3, groupID);
+            psInsert.setTime(4, startTime);
+            psInsert.setTime(5, endTime);
+            psInsert.setString(6, day);
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

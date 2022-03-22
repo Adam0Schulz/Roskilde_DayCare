@@ -243,11 +243,7 @@
                               </HBox>
                               <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="438.0" prefWidth="976.0" style="-fx-border-color: white; -fx-outline: white; -fx-background-color: white;" vbarPolicy="NEVER">
                                  <content>
-                                    <VBox blendMode="SRC_ATOP" prefHeight="707.0" prefWidth="977.0" style="-fx-background-color: white;">
-                                       <children>
-                                          <Label prefHeight="582.0" prefWidth="28.0" text="Label" />
-                                       </children>
-                                    </VBox>
+                                    <VBox fx:id="WaitingList" blendMode="SRC_ATOP" prefHeight="707.0" prefWidth="977.0" style="-fx-background-color: white;" />
                                  </content>
                               </ScrollPane>
                            </children>

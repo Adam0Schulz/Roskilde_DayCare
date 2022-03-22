@@ -29,7 +29,7 @@ public class PupilsController extends CustomStage {
     @FXML
     private VBox PupilList;
 
-    public ArrayList<VBox> getPupilList () {
+    protected ArrayList<VBox> getPupilList () {
         ArrayList<VBox> list = new ArrayList<VBox>();
         Collection<Attendee> pupils = DB_Connector.attendeeList();
         for(Attendee pupil : pupils) {
@@ -48,6 +48,11 @@ public class PupilsController extends CustomStage {
     @FXML
     public void initialize() {
         PupilList.getChildren().addAll(getPupilList());
+    }
+
+    @FXML
+    protected void addPupil(ActionEvent event) throws IOException {
+        DB_Connector.changeScene(event, "WaitingList.fxml","Waiting List");
     }
 
 

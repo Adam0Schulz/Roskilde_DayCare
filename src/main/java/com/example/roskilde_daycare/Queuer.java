@@ -31,4 +31,22 @@ public class Queuer extends Child{
         array.add(this.getCPR());
         return array;
     }
+
+    public ArrayList<String> getAllArray() {
+        ArrayList<String> array = new ArrayList<String>();
+        array.add(this.getFirstName());
+        array.add(this.getLastName());
+        array.add(this.getDateOfBirth().toString());
+        array.add(this.getGender());
+        array.add(this.getParent().getFirstName());
+        array.add(this.getParent().getLastName());
+        array.add(this.getParent().getZip() + "");
+        array.add(this.getParent().getAddress());
+        array.add(this.getParent().getCity());
+        array.add(this.getParent().getPhoneNumber());
+        array.add(this.getParent().getEmail());
+        array.add(this.getTime() + "");
+        array.add(this.getCPR());
+        return array;
+    }
 }

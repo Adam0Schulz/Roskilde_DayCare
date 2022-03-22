@@ -532,6 +532,22 @@ public class DB_Connector {
         }
     }
 
+    public static Object search(String searchObject, String searchProperty, String searchString) {
+        switch (searchObject) {
+            case "Pupil":
+                Collection<Attendee> pupils = attendeeList();
+                for (Attendee pupil : pupils) {
+
+                }
+
+                return new Attendee();
+            case "Employee":
+                return new Employee();
+            case "Queuer":
+                return new Queuer();
+        }
+    }
+
     private static void closeConnection() {
         if (resultSet != null) {
             try {

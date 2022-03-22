@@ -89,4 +89,18 @@ public class Employee {
         array.add(this.getSalary() + "");
         return array;
     }
+
+    public ArrayList<String> getAllArray() {
+        ArrayList<String> array = new ArrayList<String>();
+        array.add(this.getFirstName());
+        array.add(this.getLastName());
+        array.add(this.getEmail());
+        array.add(this.getPhoneNumber());
+        array.add(this.getAddress());
+        array.add(this.getZip() + "");
+        array.add( this.getCity());
+        array.add(this.getSalary() + "");
+        array.add(this.getCPR());
+        return array;
+    }
 }

@@ -33,13 +33,7 @@ public class PupilsController extends CustomStage {
         ArrayList<VBox> list = new ArrayList<VBox>();
         Collection<Attendee> pupils = DB_Connector.attendeeList();
         for(Attendee pupil : pupils) {
-            ArrayList<String> pupilInfo = new ArrayList<String>();
-            pupilInfo.add(pupil.getFirstName());
-            pupilInfo.add(pupil.getLastName());
-            pupilInfo.add(pupil.getGroup());
-            pupilInfo.add(pupil.getFirstName());
-            pupilInfo.add(pupil.getFirstName());
-            list.add(DynamicElements.createListItem(pupilInfo, pupilInfo));
+            list.add(DynamicElements.createListItem(pupil.getAttributeArray(), pupil.getParent().getAttributeArray(), true));
         }
         return list;
     }

@@ -1,5 +1,7 @@
 package com.example.roskilde_daycare;
 
+import java.util.ArrayList;
+
 public class Parent {
     private String firstName;
     private String lastName;
@@ -73,5 +75,15 @@ public class Parent {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public ArrayList<String> getAttributeArray() {
+        ArrayList<String> array = new ArrayList<String>();
+        array.add("Name:\n" + this.getFirstName() + " " + this.getLastName());
+        array.add("Email:\n" + this.getEmail());
+        array.add("Phone:\n" + this.getPhoneNumber());
+        array.add("Address:\n" + this.getAddress());
+        array.add("ZIP, City:\n" + this.getZip() + ", " + this.getCity());
+        return array;
     }
 }

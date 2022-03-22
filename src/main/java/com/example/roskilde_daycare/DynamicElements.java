@@ -21,7 +21,7 @@ import java.util.Objects;
 
 public class DynamicElements {
 
-    public static VBox createListItem (ArrayList<String> DisplayChildren, ArrayList<String> toggleChildren) {
+    public static VBox createListItem (ArrayList<String> DisplayChildren, ArrayList<String> toggleChildren, boolean hasParent) {
         VBox item = new VBox();
 
         // Create rolldownPane
@@ -59,7 +59,7 @@ public class DynamicElements {
                 } else {
                     rolldownPane.setPrefHeight(197);
                     rolldownPane.setStyle("-fx-background-color: #FBD3D6");
-                    rolldownPane.setCenter(createToggleContent(toggleChildren));
+                    rolldownPane.setCenter(createToggleContent(toggleChildren, hasParent));
                 }
 
             }
@@ -93,7 +93,7 @@ public class DynamicElements {
         return label;
     }
 
-    public static HBox createToggleContent(ArrayList<String> children) {
+    public static HBox createToggleContent(ArrayList<String> children, boolean hasParent) {
         HBox item = new HBox();
         VBox labelBox = new VBox();
         VBox controlBox = new VBox();
@@ -106,6 +106,10 @@ public class DynamicElements {
         Label heading = createListItemLabel("Parent");
         heading.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
         headingBox.getChildren().add(heading);
+
+        if(hasParent) {
+            labelBox.getChildren().add(headingBox);
+        }
 
 
         for(String child : children) {
@@ -138,7 +142,7 @@ public class DynamicElements {
         controlBox.getChildren().add(editBtn);
         controlBox.getChildren().add(removeBtn);
 
-        labelBox.getChildren().add(headingBox);
+
         labelBox.getChildren().add(dataBox);
 
         item.getChildren().add(labelBox);

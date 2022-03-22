@@ -3,6 +3,7 @@ package com.example.roskilde_daycare;
 
 import java.sql.Timestamp;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Queuer extends Child{
 
@@ -19,5 +20,15 @@ public class Queuer extends Child{
 
     public void setTime(Timestamp time) {
         this.time = time;
+    }
+
+    public ArrayList<String> getAttributeArray() {
+        ArrayList<String> array = new ArrayList<String>();
+        array.add(this.getFirstName());
+        array.add(this.getLastName());
+        array.add(this.getTime().toString());
+        array.add(this.getDateOfBirth().toString());
+        array.add(this.getCPR());
+        return array;
     }
 }

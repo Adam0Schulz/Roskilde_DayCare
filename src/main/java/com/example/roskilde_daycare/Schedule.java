@@ -9,15 +9,22 @@ public class Schedule {
     private Time startTime;
     private Time endTime;
     private String day;
+    private String employeeName;
 
-    private Employee employee;
-
-    public Employee getEmployee() {
-        return employee;
+    public Schedule(String group, Time startTime, Time endTime, String day, String employeeName){
+        this.group = group;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.day = day;
+        this.employeeName = employeeName;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
     public String getGroup() {

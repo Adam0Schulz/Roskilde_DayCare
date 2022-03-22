@@ -162,7 +162,7 @@
                         </Label>
                         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="824.0" spacing="21.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #F8AFB4; -fx-background-radius: 50px;" text="CANCEL" textFill="WHITE">
+                              <Button mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #F8AFB4; -fx-background-radius: 50px;" text="CANCEL" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Bold" size="14.0" />
                                  </font>

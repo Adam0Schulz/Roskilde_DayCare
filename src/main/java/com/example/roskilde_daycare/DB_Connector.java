@@ -340,7 +340,6 @@ public class DB_Connector {
     // Method to delete employee from the database (tested, works)
     public static void deleteEmployee(String CPR) {
         try {
-            // first check if exists - needs to be added
             connect();
             preparedStatement = connect.prepareStatement("DELETE FROM Daycare.Employees WHERE CPR = ?");
             preparedStatement.setString(1, CPR);
@@ -370,19 +369,11 @@ public class DB_Connector {
         }
     }
 
-
-    // update child and parent
-
-
     // view schedule
     // update schedule
     // delete schedule
 
 
-    // transfer child from waiting list to attendees
-    // delete child from queuers and add to attendees
-    // INSERT INTO table_name1(fields you want)
-    //  SELECT fields you want FROM table_name2
     public static void transferChild(String CPR, String group) {
         try {
             connect();
@@ -392,11 +383,29 @@ public class DB_Connector {
             preparedStatement.executeUpdate();
 
             // finds group´s ID
-            //preparedStatement = connect.prepareStatement()
+            preparedStatement = connect.prepareStatement("SELECT ID FROM Daycare.Classes WHERE name = ?");
+            preparedStatement.setString(1,group);
+            resultSet = preparedStatement.executeQuery();
 
-            // adds child to attendees
-            psInsert = connect.prepareStatement("INSERT INTO Daycare.Attendees(child_ID) SELECT c.ID FROM Daycare.Children c WHERE c.CPR = ?;");
+            int groupID = 0;
+            if(rs.next()){
+                groupID = rs.getInt("ID");
+            }
 
+            // finds child's ID
+            preparedStatement = connect.prepareStatement("SELECT ID from Daycare.Children WHERE CPR = ?");
+            preparedStatement.setString(1, CPR);
+            resultSet = preparedStatement.executeQuery();
+
+            int childID = 0;
+            if(rs.next()){
+                childID = rs.getInt("ID");
+            }
+
+            // adds child to attendees with childID and groupID
+            psInsert = connect.prepareStatement("INSERT INTO Daycare.Attendees(child_ID, group_ID) VALUES (?,?)");
+            psInsert.setInt(1, childID);
+            psInsert.setInt(2, groupID);
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -4,6 +4,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -161,7 +162,7 @@
                         </Label>
                         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="824.0" spacing="22.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #F8AFB4; -fx-background-radius: 50px;" text="CANCEL" textFill="WHITE">
+                              <Button mnemonicParsing="false" onAction="#cancelButton" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #F8AFB4; -fx-background-radius: 50px;" text="CANCEL" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Bold" size="14.0" />
                                  </font>
@@ -176,7 +177,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button layoutX="630.0" layoutY="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #0075A3; -fx-background-radius: 50px;" text="ADD" textFill="WHITE">
+                              <Button layoutX="630.0" layoutY="40.0" mnemonicParsing="false" onAction="#onNewEmployeeClick" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #0075A3; -fx-background-radius: 50px;" text="ADD" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Bold" size="14.0" />
                                  </font>
@@ -302,7 +303,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="105.0" prefHeight="70.0" prefWidth="200.0" spacing="65.0">
                                        <children>
-                                          <VBox alignment="CENTER_LEFT" prefHeight="108.0" prefWidth="100.0">
+                                          <VBox alignment="CENTER_LEFT" layoutX="151.0" layoutY="10.0" prefHeight="108.0" prefWidth="100.0">
                                              <children>
                                                 <Label text="CPR">
                                                    <font>
@@ -311,8 +312,18 @@
                                                 </Label>
                                                 <TextField fx:id="CPR" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #BEBEBE; -fx-border-radius: 50px;" />
                                              </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="108.0" prefWidth="100.0">
+                                             <children>
+                                                <Label text="Password">
+                                                   <font>
+                                                      <Font name="Segoe UI" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <PasswordField fx:id="password" minWidth="-Infinity" prefWidth="125.0" style="-fx-background-radius: 50;" />
+                                             </children>
                                              <HBox.margin>
-                                                <Insets right="570.0" />
+                                                <Insets right="380.0" />
                                              </HBox.margin>
                                           </VBox>
                                        </children>

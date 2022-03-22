@@ -18,14 +18,9 @@ public class WaitingListController extends CustomStage {
     protected ArrayList<VBox> getWaitingList() {
         ArrayList<VBox> list = new ArrayList<VBox>();
         Collection<Queuer> queuers = DB_Connector.waitingList();
+
         for(Queuer Queuer : queuers) {
-            ArrayList<String> queuerInfo = new ArrayList<String>();
-            queuerInfo.add(Queuer.getFirstName());
-            queuerInfo.add(Queuer.getLastName());
-            queuerInfo.add(Queuer.getFirstName());
-            queuerInfo.add(Queuer.getFirstName());
-            queuerInfo.add(Queuer.getFirstName());
-            list.add(DynamicElements.createListItem(queuerInfo, queuerInfo));
+            list.add(DynamicElements.createListItem(Queuer.getAttributeArray(), Queuer.getParent().getAttributeArray(), true));
         }
         return list;
     }

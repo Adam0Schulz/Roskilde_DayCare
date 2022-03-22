@@ -9,12 +9,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 public class EmployeesController extends CustomStage {
@@ -33,6 +36,22 @@ public class EmployeesController extends CustomStage {
     @FXML private TextField salary;
     @FXML private TextField CPR;
     @FXML private PasswordField password;
+    @FXML private VBox EmployeeList;
+
+    protected ArrayList<VBox> getEmployeeList() {
+        ArrayList<VBox> list = new ArrayList<VBox>();
+        Collection<Employee> employees = DB_Connector.employeeList();
+
+        for(Employee employee : employees) {
+            list.add(DynamicElements.createListItem(employee.getAttributeArray(), employee.getAllAttributeArray(), false));
+        }
+        return list;
+    }
+
+    @FXML
+    public void initialize() {
+        EmployeeList.getChildren().addAll(getEmployeeList());
+    }
 
     @FXML
     protected void addEmployee(ActionEvent event){

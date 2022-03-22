@@ -1,6 +1,7 @@
 package com.example.roskilde_daycare;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public abstract class Child {
     private String firstName;
@@ -66,4 +67,6 @@ public abstract class Child {
     public void setCPR(String CPR) {
         this.CPR = CPR;
     }
+
+
 }

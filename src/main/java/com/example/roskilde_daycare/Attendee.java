@@ -1,6 +1,7 @@
 package com.example.roskilde_daycare;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Attendee extends Child {
 
@@ -17,5 +18,15 @@ public class Attendee extends Child {
 
     public void setGroup(String group) {
         this.group = group;
+    }
+
+    public ArrayList<String> getAttributeArray() {
+        ArrayList<String> array = new ArrayList<String>();
+        array.add(this.getFirstName());
+        array.add(this.getLastName());
+        array.add(this.getGroup());
+        array.add(this.getDateOfBirth().toString());
+        array.add(this.getCPR());
+        return array;
     }
 }

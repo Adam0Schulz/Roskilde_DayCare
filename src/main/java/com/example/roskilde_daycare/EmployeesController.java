@@ -14,7 +14,7 @@ import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EmployeesController extends CustomStage implements Initializable {
+public class EmployeesController extends CustomStage {
 
     @FXML private Button addButton;
     @FXML private Button createEmployeeBtn;
@@ -31,14 +31,9 @@ public class EmployeesController extends CustomStage implements Initializable {
     @FXML private TextField CPR;
     @FXML private TextField password;
 
-    @Override
+/*    @Override
     public void initialize(URL location, ResourceBundle resources) {
-        addButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                DB_Connector.changeScene(event, "Employee-add.fxml", "New Employee");
-            }
-        });
+        addButton.setOnAction(event -> DB_Connector.changeScene(event, "Employee-add.fxml", "New Employee"));
 
         createEmployeeBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -59,7 +54,7 @@ public class EmployeesController extends CustomStage implements Initializable {
                 DB_Connector.changeScene(event, "Employees.fxml", "Employees");
             }
         });
-    }
+    }*/
 
 /*    @FXML
     protected void onNewEmployeeClick(Event event){

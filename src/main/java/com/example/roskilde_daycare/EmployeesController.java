@@ -5,12 +5,15 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,35 +32,16 @@ public class EmployeesController extends CustomStage {
     @FXML private TextField city;
     @FXML private TextField salary;
     @FXML private TextField CPR;
-    @FXML private TextField password;
+    @FXML private PasswordField password;
 
-/*    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        addButton.setOnAction(event -> DB_Connector.changeScene(event, "Employee-add.fxml", "New Employee"));
+    @FXML
+    protected void addEmployee(ActionEvent event){
+        DB_Connector.changeScene(event, "Employee-add.fxml","New Employee");
+    }
 
-        createEmployeeBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                String fName = firstName.getText();
-                String lName = lastName.getText();
-                String address = street.getText();
-                String mail = email.getText();
-                String town = city.getText();
-                String number = phone.getText();
-                String cpr = CPR.getText();
-                String pswrd = password.getText();
-
-                int code = Integer.parseInt(zip.getText());
-                float income = Float.parseFloat(salary.getText());
-
-                DB_Connector.addEmployee(fName, lName, mail, address, code, town, number, income, cpr, pswrd);
-                DB_Connector.changeScene(event, "Employees.fxml", "Employees");
-            }
-        });
-    }*/
-
-/*    @FXML
-    protected void onNewEmployeeClick(Event event){
+    @FXML
+    protected void onNewEmployeeClick(ActionEvent event){
+        // gets all the info from the scene
         String fName = firstName.getText();
         String lName = lastName.getText();
         String address = street.getText();
@@ -70,6 +54,18 @@ public class EmployeesController extends CustomStage {
         int code = Integer.parseInt(zip.getText());
         float income = Float.parseFloat(salary.getText());
 
+        // adds employee to the database
         DB_Connector.addEmployee(fName, lName, mail, address, code, town, number, income, cpr, pswrd);
-    }*/
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Employee has been added successfully.");
+        alert.show();
+        DB_Connector.changeScene(event, "Employees.fxml", "Employees");
+    }
+
+    @FXML
+    protected void cancelButton(ActionEvent event){
+        DB_Connector.changeScene(event, "Employees.fxml", "Employees");
+    }
+
+
 }

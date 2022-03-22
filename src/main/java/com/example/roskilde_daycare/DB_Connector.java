@@ -46,14 +46,15 @@ public class DB_Connector {
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(DB_Connector.class.getResource(fxmlFile));
-            root = loader.load();
+            root = (Parent) loader.load();
         } catch (IOException e) {
-            e.printStackTrace();
+           e.printStackTrace();
+
         }
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle(title);
-        stage.setScene(new Scene(root, 1327, 747));
+        stage.setScene(new Scene(root));
         stage.show();
     }
 

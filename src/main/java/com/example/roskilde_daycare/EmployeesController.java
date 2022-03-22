@@ -50,7 +50,10 @@ public class EmployeesController extends CustomStage {
 
     @FXML
     public void initialize() {
+
+        if(EmployeeList != null) {
         EmployeeList.getChildren().addAll(getEmployeeList());
+        }
     }
 
     @FXML

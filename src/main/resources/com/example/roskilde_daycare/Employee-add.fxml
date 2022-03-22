@@ -53,7 +53,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
-                        <Label onMouseClicked="#onScheduleClick" prefHeight="17.0" prefWidth="210.0" styleClass="active_subHeading" stylesheets="@CSS/Style.css" text="Schedule" textFill="WHITE">
+                        <Label onMouseClicked="#onScheduleClick" prefHeight="17.0" prefWidth="210.0" text="Schedule" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Bold" size="18.0" />
                            </font>

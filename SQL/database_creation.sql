@@ -44,7 +44,9 @@ CREATE TABLE IF NOT EXISTS Waiting_list (
     ID int(7) AUTO_INCREMENT PRIMARY KEY,
     Child_ID int(7),
     Timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (Child_ID) REFERENCES Children(ID)
+    FOREIGN KEY (Child_ID)
+        REFERENCES Children(ID)
+        ON DELETE CASCADE
     );
 
 CREATE TABLE IF NOT EXISTS Classes (
@@ -56,7 +58,7 @@ CREATE TABLE IF NOT EXISTS Classes (
 CREATE TABLE IF NOT EXISTS Attendees (
     child_ID int(7),
     group_ID int(7),
-    FOREIGN KEY (child_ID) REFERENCES Children(ID),
+    FOREIGN KEY (child_ID) REFERENCES Children(ID) ON DELETE CASCADE,
     FOREIGN KEY (group_ID) REFERENCES Classes(ID)
     );
 

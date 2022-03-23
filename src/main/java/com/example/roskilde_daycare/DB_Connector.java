@@ -537,6 +537,7 @@ public class DB_Connector {
             psInsert = connect.prepareStatement("INSERT INTO Daycare.Attendees(child_ID, group_ID) VALUES (?,?)");
             psInsert.setInt(1, childID);
             psInsert.setInt(2, groupID);
+            psInsert.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();

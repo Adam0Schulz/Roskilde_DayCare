@@ -12,6 +12,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -27,12 +30,23 @@ import java.util.ResourceBundle;
 
 public class PupilsController extends CustomStage {
 
+    private String searchString;
+
     @FXML
     private VBox PupilList;
 
+    @FXML
+    private TextField searchField;
+
     protected ArrayList<VBox> getPupilList () {
         ArrayList<VBox> list = new ArrayList<VBox>();
-        Collection<Attendee> pupils = DB_Connector.attendeeList();
+        Collection<Attendee> pupils;
+        if(searchField == null) {
+            pupils = DB_Connector.attendeeList();
+        } else {
+            pupils = (ArrayList<Attendee>) DB_Connector.search("Pupil", "", searchString);
+        }
+
         for(Attendee pupil : pupils) {
             list.add(DynamicElements.createListItem(pupil.getAttributeArray(), pupil.getParent().getAttributeArray(), true));
         }
@@ -42,7 +56,17 @@ public class PupilsController extends CustomStage {
 
     @FXML
     public void initialize() {
+
         PupilList.getChildren().addAll(getPupilList());
+
+        searchField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if(keyEvent.getCode().equals(KeyCode.ENTER)) {
+                    searchString = searchField.getText();
+                }
+            }
+        });
     }
 
     @FXML
@@ -50,7 +74,7 @@ public class PupilsController extends CustomStage {
         DB_Connector.changeScene(event, "WaitingList.fxml","Waiting List");
     }
 
-    @FXML
+    /*@FXML
     protected void removePupil(ActionEvent event) {
         // deletes child and parent from children and parents table
         DB_Connector.deleteChildAndParent(CPR);
@@ -59,7 +83,8 @@ public class PupilsController extends CustomStage {
         DB_Connector.changeScene(event, "Pupils.fxml", "Pupils");
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Pupil has been successfully removed.");
         alert.show();
-    }
+    }*/
+
 
 
 }

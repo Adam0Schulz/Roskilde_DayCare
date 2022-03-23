@@ -89,12 +89,12 @@ public class EmployeesController extends CustomStage {
         DB_Connector.changeScene(event, "Employees.fxml", "Employees");
     }
 
-    @FXML
+    /*@FXML
     protected void onRemoveButtonClick(ActionEvent event){
         DB_Connector.deleteEmployee(cpr);
         DB_Connector.changeScene(event, "Employees.fxml", "Employees" );
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Employee has been successfully removed.");
         alert.show();
-    }
+    }*/
 
 }

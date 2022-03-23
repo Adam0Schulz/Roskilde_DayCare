@@ -70,8 +70,20 @@ public class WaitingListController extends CustomStage {
         String sex = gender.getText();
         String date = dateOfBirth.getText();
 
-        Date dob = Date.valueOf(date);
-        int code = Integer.parseInt(ZIP);
+        Date dob = null;
+        try {
+            dob = Date.valueOf(date);
+        } catch (IllegalArgumentException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Wrong date format.");
+            alert.show();
+        }
+        int code = 0;
+        try{
+            code = Integer.parseInt(ZIP);
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Wrong zip code format.");
+            alert.show();
+        }
 
         Parent parent = DB_Connector.addParent(pfn, pln, mail, address, code, town, number);
         DB_Connector.addChild(chfn, chln, dob, sex, CPR, parent);

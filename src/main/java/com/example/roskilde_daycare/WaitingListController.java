@@ -73,7 +73,7 @@ public class WaitingListController extends CustomStage {
         Parent parent = DB_Connector.addParent(pfn, pln, mail, address, code, town, number);
         DB_Connector.addChild(chfn, chln, dob, sex, CPR);
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Child has been added successfully.");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Child has been added successfully.");
         alert.show();
         DB_Connector.changeScene(event, "WaitingList.fxml", "Waiting List");
     }

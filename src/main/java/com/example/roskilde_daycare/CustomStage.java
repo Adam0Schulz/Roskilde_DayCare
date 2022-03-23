@@ -1,9 +1,11 @@
 package com.example.roskilde_daycare;
 
 
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -68,6 +70,15 @@ public class CustomStage {
     protected void onEmployeesClick(Event event) {
         DB_Connector.changeScene(event, "Employees.fxml", "Employees");
     }
+
+    @FXML
+    protected void onLogoutClick(ActionEvent event){
+        DB_Connector.changeScene(event, "Login.fxml", "Login");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You have successfully logged out");
+        alert.show();
+    }
+
+
 
 
 }

@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -47,6 +48,17 @@ public class PupilsController extends CustomStage {
     @FXML
     protected void addPupil(ActionEvent event) throws IOException {
         DB_Connector.changeScene(event, "WaitingList.fxml","Waiting List");
+    }
+
+    @FXML
+    protected void removePupil(ActionEvent event) {
+        // deletes child and parent from children and parents table
+        DB_Connector.deleteChildAndParent(CPR);
+        // deletes child from attendee table
+
+        DB_Connector.changeScene(event, "Pupils.fxml", "Pupils");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Pupil has been successfully removed.");
+        alert.show();
     }
 
 

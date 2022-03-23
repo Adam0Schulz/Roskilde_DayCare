@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Objects;
 
 public class DB_Connector {
@@ -532,20 +533,34 @@ public class DB_Connector {
         }
     }
 
-    public static Object search(String searchObject, String searchProperty, String searchString) {
+    public static ArrayList<Object> search(String searchObject, String searchProperty, String searchString) {
+        ArrayList<Object> array = new ArrayList<Object>();
         switch (searchObject) {
             case "Pupil":
                 Collection<Attendee> pupils = attendeeList();
                 for (Attendee pupil : pupils) {
-
+                    if(pupil.toString().contains(searchString)) {
+                        array.add(pupil);
+                    }
                 }
 
-                return new Attendee();
             case "Employee":
-                return new Employee();
+                Collection<Employee> employees = employeeList();
+                for (Employee employee : employees) {
+                    if(employee.toString().contains(searchString)) {
+                        array.add(employee);
+                    }
+                }
+
             case "Queuer":
-                return new Queuer();
+                Collection<Queuer> queuers = waitingList();
+                for (Queuer queuer : queuers) {
+                    if(queuer.toString().contains(searchString)) {
+                        array.add(queuer);
+                    }
+                }
         }
+        return array;
     }
 
     private static void closeConnection() {

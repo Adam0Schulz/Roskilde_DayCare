@@ -86,4 +86,9 @@ public class Parent {
         array.add("ZIP, City:\n" + this.getZip() + ", " + this.getCity());
         return array;
     }
+
+    @Override
+    public String toString() {
+        return getFirstName() + getLastName() + getEmail() + getPhoneNumber() + getAddress() + getZip() + getCity();
+    }
 }

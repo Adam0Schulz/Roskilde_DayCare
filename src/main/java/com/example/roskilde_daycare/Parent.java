@@ -23,6 +23,8 @@ public class Parent {
         this.ID = ID;
     }
 
+    public int getID() { return ID; }
+
     public String getFirstName() {
         return firstName;
     }

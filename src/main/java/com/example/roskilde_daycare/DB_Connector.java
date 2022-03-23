@@ -142,13 +142,14 @@ public class DB_Connector {
                 //String time = resultSet.getString("Timestamp");
                 //LocalDateTime date = LocalDateTime.parse(time);
 
-                preparedStatement = connect.prepareStatement("SELECT first_name, last_name, email_address, street, zip_code, city, phone_number FROM Daycare.Parents WHERE ID = ?");
+                preparedStatement = connect.prepareStatement("SELECT ID, first_name, last_name, email_address, street, zip_code, city, phone_number FROM Daycare.Parents WHERE ID = ?");
                 preparedStatement.setInt(1, parentID);
                 rs = preparedStatement.executeQuery();
 
                 com.example.roskilde_daycare.Parent parent = null;
 
                 if (rs.next()) {
+                    int ID = rs.getInt("ID");
                     String firstN = rs.getString("first_name");
                     String lastN = rs.getString("last_name");
                     String email = rs.getString("email_address");
@@ -157,7 +158,7 @@ public class DB_Connector {
                     String city = rs.getString("city");
                     String phone = rs.getString("phone_number");
 
-                    parent = new com.example.roskilde_daycare.Parent(firstN, lastN, email, street, zip, city, phone);
+                    parent = new com.example.roskilde_daycare.Parent(firstN, lastN, email, street, zip, city, phone, ID);
                 }
 
                 waitingList.add(new Queuer(firstName, lastName, dateOfBirth, gender, parent, time, CPR ));
@@ -188,13 +189,14 @@ public class DB_Connector {
                 String groupName = resultSet.getString("name");
 
 
-                preparedStatement = connect.prepareStatement("SELECT first_name, last_name, email_address, street, zip_code, city, phone_number FROM Daycare.Parents WHERE ID = ?");
+                preparedStatement = connect.prepareStatement("SELECT ID, first_name, last_name, email_address, street, zip_code, city, phone_number FROM Daycare.Parents WHERE ID = ?");
                 preparedStatement.setInt(1, parentID);
                 rs = preparedStatement.executeQuery();
 
                 com.example.roskilde_daycare.Parent parent = null;
 
                 if (rs.next()) {
+                    int ID = rs.getInt("ID");
                     String firstN = rs.getString("first_name");
                     String lastN = rs.getString("last_name");
                     String email = rs.getString("email_address");
@@ -203,7 +205,7 @@ public class DB_Connector {
                     String city = rs.getString("city");
                     String phone = rs.getString("phone_number");
 
-                    parent = new com.example.roskilde_daycare.Parent(firstN, lastN, email, street, zip, city, phone);
+                    parent = new com.example.roskilde_daycare.Parent(firstN, lastN, email, street, zip, city, phone, ID);
                 }
 
                 attendees.add(new Attendee(firstName, lastName, dateOfBirth, gender, parent, groupName, CPR));
@@ -288,7 +290,7 @@ public class DB_Connector {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Child " + firstName + " " + lastName + "already exists.");
                 alert.show();
             } else {
-
+                int parentID = parent.getID();
                 psInsert = connect.prepareStatement("INSERT INTO Daycare.Children(first_name, last_name, parent_ID, date_of_birth, gender, CPR) VALUES (?, ?, ?, ?, ?, ?)");
                 psInsert.setString(1, firstName);
                 psInsert.setString(2, lastName);
@@ -333,7 +335,16 @@ public class DB_Connector {
             psInsert.setString(6, city);
             psInsert.setString(7,phone);
 
-            parent = new com.example.roskilde_daycare.Parent(firstName, lastName, email, street, zip, city, phone);
+            preparedStatement = connect.prepareStatement("SELECT ID FROM daycare.parents WHERE phone_number = ?");
+            preparedStatement.setString(1, phone);
+            resultSet = preparedStatement.executeQuery();
+
+            int parentID = 0;
+            if(resultSet.next()) {
+                parentID = resultSet.getInt("ID");
+            }
+
+            parent = new com.example.roskilde_daycare.Parent(firstName, lastName, email, street, zip, city, phone, parentID);
 
             psInsert.executeUpdate();
         } catch (SQLException e) {
@@ -536,34 +547,41 @@ public class DB_Connector {
         }
     }
 
-    public static ArrayList<Object> search(String searchObject, String searchProperty, String searchString) {
-        ArrayList<Object> array = new ArrayList<Object>();
+    public static Collection<?> search(String searchObject, String searchProperty, String searchString) {
         switch (searchObject) {
             case "Pupil":
+                Collection<Attendee> array = new ArrayList<Attendee>();
                 Collection<Attendee> pupils = attendeeList();
                 for (Attendee pupil : pupils) {
                     if(pupil.toString().contains(searchString)) {
+
                         array.add(pupil);
+
                     }
                 }
+                return array;
 
             case "Employee":
+                Collection<Employee> array1 = new ArrayList<Employee>();
                 Collection<Employee> employees = employeeList();
                 for (Employee employee : employees) {
                     if(employee.toString().contains(searchString)) {
-                        array.add(employee);
+                        array1.add(employee);
                     }
                 }
+                return array1;
 
             case "Queuer":
+                Collection<Queuer> array3 = new ArrayList<Queuer>();
                 Collection<Queuer> queuers = waitingList();
                 for (Queuer queuer : queuers) {
                     if(queuer.toString().contains(searchString)) {
-                        array.add(queuer);
+                        array3.add(queuer);
                     }
                 }
+                return array3;
         }
-        return array;
+        return null;
     }
 
     private static void closeConnection() {

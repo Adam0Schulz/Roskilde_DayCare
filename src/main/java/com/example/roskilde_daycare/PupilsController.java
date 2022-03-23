@@ -40,11 +40,12 @@ public class PupilsController extends CustomStage {
 
     protected ArrayList<VBox> getPupilList () {
         ArrayList<VBox> list = new ArrayList<VBox>();
-        Collection<Attendee> pupils;
-        if(searchField == null) {
-            pupils = DB_Connector.attendeeList();
-        } else {
-            pupils = (ArrayList<Attendee>) DB_Connector.search("Pupil", "", searchString);
+        Collection<Attendee> pupils = DB_Connector.attendeeList();
+        if(searchString != null) {
+            Collection<Attendee> searchResult = (Collection<Attendee>) DB_Connector.search("Pupil", "", searchString);
+            if(searchResult.size() > 0) {
+                pupils = searchResult;
+            }
         }
 
         for(Attendee pupil : pupils) {

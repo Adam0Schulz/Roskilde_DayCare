@@ -39,8 +39,11 @@ public class WaitingListController extends CustomStage {
 
     @FXML
     public void initialize() {
-        WaitingList.getChildren().addAll(getWaitingList());
+        if(WaitingList != null) {
+            WaitingList.getChildren().addAll(getWaitingList());
+        }
     }
+
     @FXML
     protected void onAddButtonClick(ActionEvent event){
         DB_Connector.changeScene(event, "WaitingList-add.fxml", "New Child");
@@ -71,7 +74,7 @@ public class WaitingListController extends CustomStage {
         int code = Integer.parseInt(ZIP);
 
         Parent parent = DB_Connector.addParent(pfn, pln, mail, address, code, town, number);
-        DB_Connector.addChild(chfn, chln, dob, sex, CPR);
+        DB_Connector.addChild(chfn, chln, dob, sex, CPR, parent);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Child has been added successfully.");
         alert.show();

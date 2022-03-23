@@ -11,12 +11,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 
 public class DB_Connector {
     private static Connection connect = null;
@@ -553,30 +551,132 @@ public class DB_Connector {
                 Collection<Attendee> array = new ArrayList<Attendee>();
                 Collection<Attendee> pupils = attendeeList();
                 for (Attendee pupil : pupils) {
-                    if(pupil.toString().contains(searchString)) {
+                    if(searchProperty == "") {
+                        if(pupil.toString().toLowerCase(Locale.ROOT).indexOf(searchString.toLowerCase(Locale.ROOT)) != -1) {
+                            System.out.println(pupil);
+                            array.add(pupil);
 
-                        array.add(pupil);
+                        }
+                    } else if (searchProperty.equalsIgnoreCase("first")) {
+                        if(pupil.getFirstName().equalsIgnoreCase(searchString)) {
+                            System.out.println(pupil);
+                            array.add(pupil);
 
+                        }
+                    }else if (searchProperty.equalsIgnoreCase("last")) {
+                        if(pupil.getLastName().equalsIgnoreCase(searchString)) {
+                            System.out.println(pupil);
+                            array.add(pupil);
+
+                        }
+                    } else if (searchProperty.equalsIgnoreCase("cpr")) {
+                        if(pupil.getCPR().contains(searchString)) {
+                            System.out.println(pupil);
+                            array.add(pupil);
+
+                        }
+                    } else if (searchProperty.equalsIgnoreCase("phone")) {
+                        if(pupil.getParent().getPhoneNumber().contains(searchString)) {
+                            System.out.println(pupil);
+                            array.add(pupil);
+
+                        }
+                    } else if (searchProperty.equalsIgnoreCase("sex")) {
+                        if(pupil.getGender().equalsIgnoreCase(searchString)) {
+                            System.out.println(pupil);
+                            array.add(pupil);
+
+                        }
+                    } else {
+                        System.out.println("weird search property");
                     }
+
                 }
                 return array;
 
             case "Employee":
                 Collection<Employee> array1 = new ArrayList<Employee>();
                 Collection<Employee> employees = employeeList();
-                for (Employee employee : employees) {
-                    if(employee.toString().contains(searchString)) {
-                        array1.add(employee);
+                for(Employee employee : employees) {
+                    if(searchProperty == "") {
+                        if(employee.toString().toLowerCase(Locale.ROOT).indexOf(searchString.toLowerCase(Locale.ROOT)) != -1) {
+                            System.out.println(employee);
+                            array1.add(employee);
+
+                        }
+                    } else if (searchProperty.equalsIgnoreCase("first")) {
+                        if(employee.getFirstName().equalsIgnoreCase(searchString)) {
+                            System.out.println(employee);
+                            array1.add(employee);
+
+                        }
+                    }else if (searchProperty.equalsIgnoreCase("last")) {
+                        if(employee.getLastName().equalsIgnoreCase(searchString)) {
+                            System.out.println(employee);
+                            array1.add(employee);
+
+                        }
+                    } else if (searchProperty.equalsIgnoreCase("cpr")) {
+                        if(employee.getCPR().contains(searchString)) {
+                            System.out.println(employee);
+                            array1.add(employee);
+
+                        }
+                    } else if (searchProperty.equalsIgnoreCase("phone")) {
+                        if(employee.getPhoneNumber().contains(searchString)) {
+                            System.out.println(employee);
+                            array1.add(employee);
+
+                        }
+                    } else {
+                        System.out.println("weird search property");
                     }
                 }
+
                 return array1;
 
             case "Queuer":
                 Collection<Queuer> array3 = new ArrayList<Queuer>();
                 Collection<Queuer> queuers = waitingList();
-                for (Queuer queuer : queuers) {
-                    if(queuer.toString().contains(searchString)) {
-                        array3.add(queuer);
+                for(Queuer queuer : queuers) {
+                    if(searchProperty == "") {
+                        if(queuer.toString().toLowerCase(Locale.ROOT).indexOf(searchString.toLowerCase(Locale.ROOT)) != -1) {
+                            System.out.println(queuer);
+                            array3.add(queuer);
+
+                        }
+                    } else if (searchProperty.equalsIgnoreCase("first")) {
+                        if(queuer.getFirstName().equalsIgnoreCase(searchString)) {
+                            System.out.println(queuer);
+                            array3.add(queuer);
+
+                        }
+                    }else if (searchProperty.equalsIgnoreCase("last")) {
+                        if(queuer.getLastName().equalsIgnoreCase(searchString)) {
+                            System.out.println(queuer);
+                            array3.add(queuer);
+
+                        }
+                    } else if (searchProperty.equalsIgnoreCase("cpr")) {
+                        if(queuer.getCPR().contains(searchString)) {
+                            System.out.println(queuer);
+                            array3.add(queuer);
+
+                        }
+                    } else if (searchProperty.equalsIgnoreCase("phone")) {
+                        if(queuer.getParent().getPhoneNumber().contains(searchString)) {
+                            System.out.println(queuer);
+                            array3.add(queuer);
+
+                        }
+                    } else if (searchProperty.equalsIgnoreCase("sex")) {
+                        if(queuer.getGender().equalsIgnoreCase(searchString)) {
+                            System.out.println(queuer);
+                            array3.add(queuer);
+
+                        }
+                    } else {
+                        System.out.println("weird search property");
                     }
                 }
                 return array3;

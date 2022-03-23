@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 
 public class PupilsController extends CustomStage {
 
-    private String searchString;
+    private String[] search;
 
     @FXML
     private VBox PupilList;
@@ -41,10 +41,12 @@ public class PupilsController extends CustomStage {
     protected ArrayList<VBox> getPupilList () {
         ArrayList<VBox> list = new ArrayList<VBox>();
         Collection<Attendee> pupils = DB_Connector.attendeeList();
-        if(searchString != null) {
-            Collection<Attendee> searchResult = (Collection<Attendee>) DB_Connector.search("Pupil", "", searchString);
+        if(search != null) {
+            Collection<Attendee> searchResult = (Collection<Attendee>) DB_Connector.search("Pupil", search[0], search[1]);
             if(searchResult.size() > 0) {
                 pupils = searchResult;
+            } else {
+                System.out.println("zero search results");
             }
         }
 
@@ -64,7 +66,22 @@ public class PupilsController extends CustomStage {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if(keyEvent.getCode().equals(KeyCode.ENTER)) {
-                    searchString = searchField.getText();
+                    String searchText = searchField.getText();
+                    if(searchText == "") {
+                        search = null;
+                    } else {
+                        if(searchText.contains(": ")) {
+                            search = searchText.split(": ", 2);
+                        } else {
+                            search = new String[2];
+                            search[0] = "";
+                            search[1] = searchText;
+                        }
+
+                        System.out.println(search[0] + " " + search[1]);
+                    }
+                    PupilList.getChildren().setAll(getPupilList());
+
                 }
             }
         });

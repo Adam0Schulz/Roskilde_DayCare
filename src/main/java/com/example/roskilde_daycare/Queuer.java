@@ -49,4 +49,9 @@ public class Queuer extends Child{
         array.add(this.getCPR());
         return array;
     }
+
+    @Override
+    public String toString() {
+        return getFirstName() + getLastName() + getTime() + getCPR() + getGender() + getDateOfBirth() + getParent();
+    }
 }

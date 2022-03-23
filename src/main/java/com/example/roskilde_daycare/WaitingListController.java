@@ -32,7 +32,7 @@ public class WaitingListController extends CustomStage {
         Collection<Queuer> queuers = DB_Connector.waitingList();
 
         for(Queuer Queuer : queuers) {
-            list.add(DynamicElements.createListItem(Queuer.getAttributeArray(), Queuer.getParent().getAttributeArray(), true));
+            list.add(DynamicElements.createListItem("queuer",Queuer.getAttributeArray(), Queuer.getParent().getAttributeArray(), true));
         }
         return list;
     }

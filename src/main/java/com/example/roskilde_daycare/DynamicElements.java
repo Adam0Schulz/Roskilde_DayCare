@@ -1,10 +1,12 @@
 package com.example.roskilde_daycare;
 
 import javafx.animation.ScaleTransition;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,7 +23,7 @@ import java.util.Objects;
 
 public class DynamicElements {
 
-    public static VBox createListItem (ArrayList<String> DisplayChildren, ArrayList<String> toggleChildren, boolean hasParent) {
+    public static VBox createListItem (String object, ArrayList<String> DisplayChildren, ArrayList<String> toggleChildren, boolean hasParent) {
         VBox item = new VBox();
 
         // Create rolldownPane
@@ -59,7 +61,7 @@ public class DynamicElements {
                 } else {
                     rolldownPane.setPrefHeight(197);
                     rolldownPane.setStyle("-fx-background-color: #FBD3D6");
-                    rolldownPane.setCenter(createToggleContent(toggleChildren, hasParent));
+                    rolldownPane.setCenter(createToggleContent(object, toggleChildren, hasParent, DisplayChildren.get(4)));
                 }
 
             }
@@ -93,7 +95,7 @@ public class DynamicElements {
         return label;
     }
 
-    public static HBox createToggleContent(ArrayList<String> children, boolean hasParent) {
+    public static HBox createToggleContent(String object, ArrayList<String> children, boolean hasParent, String cpr) {
         HBox item = new HBox();
         VBox labelBox = new VBox();
         VBox controlBox = new VBox();
@@ -127,7 +129,43 @@ public class DynamicElements {
 
         Button removeBtn = new Button();
         removeBtn.setText("REMOVE");
-        removeBtn.setId("remove");
+        removeBtn.setId("remove " + cpr);
+
+        if (object.equals("Employee")){
+            removeBtn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    DB_Connector.deleteEmployee(cpr);
+                    DB_Connector.changeScene(actionEvent, "Employees.fxml", "Pupils");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Employee has been successfully removed.");
+                    alert.show();
+                }
+            });
+        } else if (object.equals("Pupil")) {
+            removeBtn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    DB_Connector.deleteChildAndParent(cpr);
+                    DB_Connector.changeScene(actionEvent, "Pupils.fxml", "Pupils");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Employee has been successfully removed.");
+                    alert.show();
+                }
+            });
+        } else if (object.equals("Queuer")) {
+            removeBtn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    DB_Connector.deleteChildAndParent(cpr);
+                    DB_Connector.changeScene(actionEvent, "WaitingList.fxml", "Waiting List");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Employee has been successfully removed.");
+                    alert.show();
+                }
+            });
+        } else {
+            System.out.println("incorrect object passed in to dynamic element");
+        }
+
+        System.out.println(removeBtn.getId());
         removeBtn.setStyle("-fx-background-color: #F84E8C; -fx-background-radius: 50px; -fx-text-fill: white; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 14px");
         removeBtn.setPrefWidth(130);
         removeBtn.setPrefHeight(20);

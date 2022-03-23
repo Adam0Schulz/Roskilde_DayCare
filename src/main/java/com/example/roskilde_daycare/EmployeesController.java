@@ -43,7 +43,7 @@ public class EmployeesController extends CustomStage {
         Collection<Employee> employees = DB_Connector.employeeList();
 
         for(Employee employee : employees) {
-            list.add(DynamicElements.createListItem(employee.getAttributeArray(), employee.getAllAttributeArray(), false));
+            list.add(DynamicElements.createListItem("Employee",employee.getAttributeArray(), employee.getAllAttributeArray(), false));
         }
         return list;
     }
@@ -89,12 +89,6 @@ public class EmployeesController extends CustomStage {
         DB_Connector.changeScene(event, "Employees.fxml", "Employees");
     }
 
-    /*@FXML
-    protected void onRemoveButtonClick(ActionEvent event){
-        DB_Connector.deleteEmployee(cpr);
-        DB_Connector.changeScene(event, "Employees.fxml", "Employees" );
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Employee has been successfully removed.");
-        alert.show();
-    }*/
+
 
 }

@@ -51,7 +51,7 @@ public class PupilsController extends CustomStage {
         }
 
         for(Attendee pupil : pupils) {
-            list.add(DynamicElements.createListItem(pupil.getAttributeArray(), pupil.getParent().getAttributeArray(), true));
+            list.add(DynamicElements.createListItem("Pupil",pupil.getAttributeArray(), pupil.getParent().getAttributeArray(), true));
         }
         return list;
     }

@@ -86,7 +86,7 @@ public class Employee {
         array.add(this.getLastName());
         array.add(this.getPhoneNumber());
         array.add(this.getEmail());
-        array.add(this.getSalary() + "");
+        array.add(this.getCPR() + "");
         return array;
     }
 

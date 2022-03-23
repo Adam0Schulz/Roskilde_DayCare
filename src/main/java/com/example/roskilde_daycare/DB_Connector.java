@@ -276,7 +276,7 @@ public class DB_Connector {
     }
 
     // Method to add a child to the Children table and Waiting list (tested, works, method addParent returns Parent and has to be used to get parent´s ID)
-    public static void addChild(String firstName, String lastName, Date dateOfBirth, String gender, String CPR){
+    public static void addChild(String firstName, String lastName, Date dateOfBirth, String gender, String CPR, com.example.roskilde_daycare.Parent parent){
         try {
             connect();
             // checking if child already exists
@@ -288,12 +288,14 @@ public class DB_Connector {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Child " + firstName + " " + lastName + "already exists.");
                 alert.show();
             } else {
-                psInsert = connect.prepareStatement("INSERT INTO Daycare.Children(first_name, last_name, date_of_birth, gender, CPR) VALUES (?, ?, ?, ?, ?)");
+
+                psInsert = connect.prepareStatement("INSERT INTO Daycare.Children(first_name, last_name, parent_ID, date_of_birth, gender, CPR) VALUES (?, ?, ?, ?, ?, ?)");
                 psInsert.setString(1, firstName);
                 psInsert.setString(2, lastName);
-                psInsert.setDate(3, dateOfBirth);
-                psInsert.setString(4, gender);
-                psInsert.setString(5, CPR);
+                psInsert.setInt(3, parentID);
+                psInsert.setDate(4, dateOfBirth);
+                psInsert.setString(5, gender);
+                psInsert.setString(6, CPR);
                 psInsert.executeUpdate();
 
                 preparedStatement = connect.prepareStatement("SELECT ID FROM Daycare.Children WHERE CPR = ?");
@@ -340,6 +342,7 @@ public class DB_Connector {
             closeConnection();
         } return parent;
     }
+
     // Method to delete employee from the database (tested, works)
     public static void deleteEmployee(String CPR) {
         try {

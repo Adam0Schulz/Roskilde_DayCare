@@ -10,8 +10,9 @@ public class Parent {
     private int zip;
     private String city;
     private String phoneNumber;
+    private int ID;
 
-    public Parent (String firstName, String lastName, String email, String address, int zip, String city, String phoneNumber){
+    public Parent (String firstName, String lastName, String email, String address, int zip, String city, String phoneNumber, int ID){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -19,6 +20,7 @@ public class Parent {
         this.zip = zip;
         this.city = city;
         this.phoneNumber = phoneNumber;
+        this.ID = ID;
     }
 
     public String getFirstName() {

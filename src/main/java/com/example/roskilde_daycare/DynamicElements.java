@@ -57,11 +57,12 @@ public class DynamicElements {
                     rolldownPane.setPrefHeight(1);
                     rolldownPane.setStyle("-fx-background-color: #D3D3D3");
                     rolldownPane.setCenter(null);
-
+                    arrowBox.setRotate(-90);
                 } else {
                     rolldownPane.setPrefHeight(197);
                     rolldownPane.setStyle("-fx-background-color: #FBD3D6");
                     rolldownPane.setCenter(createToggleContent(object, toggleChildren, hasParent, DisplayChildren.get(4)));
+                    arrowBox.setRotate(0);
                 }
 
             }

@@ -128,6 +128,7 @@ INSERT INTO Daycare.Employees (first_name, last_name, email_address, street, zip
 
 INSERT INTO Daycare.Schedule (active) VALUES (true);
 
+USE daycare;
 INSERT INTO Employee_assigment (schedule_ID, employee_ID, group_ID, start_time, end_time, day) VALUES (1, 1, 1, '06:00:00', '12:00:00', 'MO');
 INSERT INTO Employee_assigment (schedule_ID, employee_ID, group_ID, start_time, end_time, day) VALUES (1, 2, 1, '06:00:00', '12:00:00', 'MO');
 INSERT INTO Employee_assigment (schedule_ID, employee_ID, group_ID, start_time, end_time, day) VALUES (1, 9, 3, '06:00:00', '12:00:00', 'MO');

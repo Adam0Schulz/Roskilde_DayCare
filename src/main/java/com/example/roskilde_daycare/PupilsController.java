@@ -92,17 +92,6 @@ public class PupilsController extends CustomStage {
         DB_Connector.changeScene(event, "WaitingList.fxml","Waiting List");
     }
 
-    /*@FXML
-    protected void removePupil(ActionEvent event) {
-        // deletes child and parent from children and parents table
-        DB_Connector.deleteChildAndParent(CPR);
-        // deletes child from attendee table
-
-        DB_Connector.changeScene(event, "Pupils.fxml", "Pupils");
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Pupil has been successfully removed.");
-        alert.show();
-    }*/
-
 
 
 }

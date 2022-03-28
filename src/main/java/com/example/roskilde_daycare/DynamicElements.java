@@ -110,12 +110,12 @@ public class DynamicElements {
         heading.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
         headingBox.getChildren().add(heading);
 
-        if(hasParent) {
+        if (hasParent) {
             labelBox.getChildren().add(headingBox);
         }
 
 
-        for(String child : children) {
+        for (String child : children) {
             Label data = createListItemLabel(child);
             data.setStyle("-fx-font-size: 14px");
             dataBox.getChildren().add(data);
@@ -132,7 +132,7 @@ public class DynamicElements {
         removeBtn.setText("REMOVE");
         removeBtn.setId("remove " + cpr);
 
-        if (object.equals("Employee")){
+        if (object.equals("Employee")) {
             removeBtn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
@@ -166,7 +166,6 @@ public class DynamicElements {
             System.out.println("incorrect object passed in to dynamic element");
         }
 
-        System.out.println(removeBtn.getId());
         removeBtn.setStyle("-fx-background-color: #F84E8C; -fx-background-radius: 50px; -fx-text-fill: white; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 14px");
         removeBtn.setPrefWidth(130);
         removeBtn.setPrefHeight(20);
@@ -177,6 +176,11 @@ public class DynamicElements {
         editBtn.setStyle("-fx-background-color: #0075A3; -fx-background-radius: 50px; -fx-text-fill: white; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 14px");
         editBtn.setPrefWidth(130);
         editBtn.setPrefHeight(20);
+
+        if(!(DB_Connector.getCurrentUser().equals("Sandra Madsen"))) {
+            editBtn.setDisable(true);
+            removeBtn.setDisable(true);
+        }
 
         controlBox.getChildren().add(editBtn);
         controlBox.getChildren().add(removeBtn);

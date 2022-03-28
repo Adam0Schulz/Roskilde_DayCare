@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="747.0" prefWidth="1327.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.roskilde_daycare.ScheduleController">
@@ -85,18 +84,10 @@
                      <center>
                         <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="130.0" spacing="15.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="20.0" prefWidth="42.0" style="-fx-background-color: #F8AFB4; -fx-background-radius: 50px;" VBox.vgrow="NEVER">
+                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" opacity="0.0" prefHeight="20.0" prefWidth="42.0" style="-fx-background-color: #F8AFB4; -fx-background-radius: 50px;" VBox.vgrow="NEVER">
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin>
-                                 <children>
-                                    <Circle fill="WHITE" layoutX="31.0" layoutY="10.0" radius="10.0" stroke="#f8afb4" strokeType="INSIDE" />
-                                    <ImageView fitHeight="150.0" fitWidth="13.0" layoutX="8.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@img/sun.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>

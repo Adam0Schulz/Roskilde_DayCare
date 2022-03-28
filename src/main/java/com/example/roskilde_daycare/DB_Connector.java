@@ -27,6 +27,11 @@ public class DB_Connector {
     private static PreparedStatement ps = null;
     private static ResultSet resultSet = null;
     private static ResultSet rs = null;
+    private static String currentUser = "";
+
+    public static String getCurrentUser() {
+        return currentUser;
+    }
 
     // connection to databasedk
     public static Connection connect() {
@@ -62,7 +67,7 @@ public class DB_Connector {
     public static void login(ActionEvent event, String email, String password){
         try {
             connect();
-            preparedStatement = connect.prepareStatement("SELECT password from Daycare.Employees WHERE email_address = ?");
+            preparedStatement = connect.prepareStatement("SELECT CONCAT(first_name, ' ', last_name) AS name, password from Daycare.Employees WHERE email_address = ?");
             preparedStatement.setString(1, email);
             resultSet = preparedStatement.executeQuery();
 
@@ -73,6 +78,7 @@ public class DB_Connector {
             } else {
                 while (resultSet.next()) {
                     String retrievedPassword = resultSet.getString("password");
+                    currentUser = resultSet.getString("name");
                     if (retrievedPassword.equals(password)) {
                         changeScene(event, "Pupils.fxml", "Welcome!");
                     } else {

@@ -5,8 +5,10 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -39,7 +41,21 @@ public class EmployeesController extends CustomStage {
     @FXML private VBox EmployeeList;
 
     protected ArrayList<VBox> getEmployeeList() {
+
         ArrayList<VBox> list = new ArrayList<VBox>();
+        if(!(DB_Connector.getCurrentUser().equals("Sandra Madsen"))) {
+            VBox box = new VBox();
+            box.setPrefWidth(977);
+            box.setPrefHeight(59);
+            box.setAlignment(Pos.CENTER);
+            Label accessDeniedMessage = DynamicElements.createListItemLabel("Unfortunately you don't have access to this information :(");
+            accessDeniedMessage.setAlignment(Pos.CENTER);
+            accessDeniedMessage.setPrefWidth(977);
+            box.getChildren().add(accessDeniedMessage);
+            list.add(box);
+            return list;
+        }
+
         Collection<Employee> employees = DB_Connector.employeeList();
 
         for(Employee employee : employees) {

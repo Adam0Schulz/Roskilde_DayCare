@@ -396,13 +396,12 @@ public class DB_Connector {
         try{
             connect();
             // gets active schedule´s
-            preparedStatement = connect.prepareStatement("SELECT e.start_time, e.end_time, e.day, e.employee_ID, e.group_ID FROM Daycare.Employee_assigment e JOIN Daycare.Schedule s ON e.schedule_ID = s.ID WHERE s.active = ? ");
+            preparedStatement = connect.prepareStatement("SELECT e.shift , e.day, e.employee_ID, e.group_ID FROM Daycare.Employee_assigment e JOIN Daycare.Schedule s ON e.schedule_ID = s.ID WHERE s.active = ? ");
             preparedStatement.setBoolean(1, true);
             rs = preparedStatement.executeQuery();
 
             while(rs.next()){
-                Time startTime = rs.getTime("start_time");
-                Time endTime = rs.getTime("end_time");
+                String shift = rs.getString("shift");
                 String day = rs.getString("day");
                 int employeeID = rs.getInt("employee_ID");
                 int groupID = rs.getInt("group_ID");
@@ -429,7 +428,7 @@ public class DB_Connector {
                     groupName = resultSet.getString("name");
                 }
 
-                activeSchedule.add(new Schedule(groupName, startTime, endTime, day, employeeName));
+                activeSchedule.add(new Schedule(groupName, shift, day, employeeName));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -438,6 +437,7 @@ public class DB_Connector {
     } return activeSchedule;
     }
 
+    // creates active schedule and set the previous one to not active
     public static int createSchedule(){
         int scheduleID = 0;
         try{
@@ -456,7 +456,7 @@ public class DB_Connector {
             preparedStatement.setBoolean(1,true);
             rs = preparedStatement.executeQuery();
 
-            while(rs.next()){
+            if(rs.next()){
                 scheduleID = rs.getInt("ID");
             }
         } catch (SQLException e) {
@@ -466,48 +466,49 @@ public class DB_Connector {
         } return scheduleID;
     }
 
-    // Have to pass in the schedule ID from method createSchedule
-    public static void addEmployeeAssignment(String groupName, Time startTime, Time endTime, String day, String employeeName, int scheduleID){
-        try {
-            connect();
-            // gets employeeID based on name
-            String[] array = employeeName.split(" ", 2);
-            String firstName = array[0];
-            String lastName = array[1];
-            preparedStatement = connect.prepareStatement("SELECT ID FROM Daycare.Employees e WHERE e.first_name = ? AND e.last_name = ? ");
-            preparedStatement.setString(1, firstName);
-            preparedStatement.setString(2, lastName);
-            resultSet = preparedStatement.executeQuery();
+    // creates all the employee assignments
+    public static void addEmployeeAssignments(Collection<Schedule> assignments){
+        for (Schedule assignment : assignments ) {
+            try {
+                connect();
+                // gets employeeID based on name
+                String[] array = assignment.getEmployeeName().split(" ", 2); // potencional bug - employee name format
+                String firstName = array[0];
+                String lastName = array[1];
+                preparedStatement = connect.prepareStatement("SELECT ID FROM Daycare.Employees e WHERE e.first_name = ? AND e.last_name = ? ");
+                preparedStatement.setString(1, firstName);
+                preparedStatement.setString(2, lastName);
+                resultSet = preparedStatement.executeQuery();
 
-            int employeeID = 0;
-            while(rs.next()){
-                employeeID = rs.getInt("ID");
+                int employeeID = 0;
+                while (rs.next()) {
+                    employeeID = rs.getInt("ID");
+                }
+
+                // gets groupID based on name
+                preparedStatement = connect.prepareStatement("SELECT ID FROM Daycare.Classes WHERE name = ?");
+                preparedStatement.setString(1, assignment.getGroup());
+                rs = preparedStatement.executeQuery();
+
+                int groupID = 0;
+                while (rs.next()) {
+                    groupID = rs.getInt("ID");
+                }
+
+                // inserts new employee assignment
+                psInsert = connect.prepareStatement("INSERT INTO Daycare.Employee_assigment (schedule_ID, employee_ID, group_ID, shift, day) VALUES (?, ?, ?, ?, ?, ?)");
+                psInsert.setInt(1, createSchedule());
+                psInsert.setInt(2, employeeID);
+                psInsert.setInt(3, groupID);
+                psInsert.setString(4, assignment.getShift());
+                psInsert.setString(5, assignment.getDay());
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-
-            // gets groupID based on name
-            preparedStatement = connect.prepareStatement("SELECT ID FROM Daycare.Classes WHERE name = ?");
-            preparedStatement.setString(1, groupName);
-            rs = preparedStatement.executeQuery();
-
-            int groupID = 0;
-            while(rs.next()){
-                groupID = rs.getInt("ID");
-            }
-
-            // inserts new employee assignment
-            psInsert = connect.prepareStatement("INSERT INTO Daycare.Employee_assigment (schedule_ID, employee_ID, group_ID, start_time, end_time, day) VALUES (?, ?, ?, ?, ?, ?)");
-            psInsert.setInt(1, scheduleID);
-            psInsert.setInt(2,employeeID);
-            psInsert.setInt(3, groupID);
-            psInsert.setTime(4, startTime);
-            psInsert.setTime(5, endTime);
-            psInsert.setString(6, day);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
         }
+        closeConnection();
+
     }
 
 

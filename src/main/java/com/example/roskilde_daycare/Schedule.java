@@ -6,18 +6,18 @@ import java.sql.Time;
 public class Schedule {
 
     private String group;
-    private Time startTime;
-    private Time endTime;
+    private String shift;
     private String day;
     private String employeeName;
 
-    public Schedule(String group, Time startTime, Time endTime, String day, String employeeName){
+    public Schedule(String group, String shift , String day, String employeeName){
         this.group = group;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.shift = shift;
         this.day = day;
         this.employeeName = employeeName;
     }
+
+    public Schedule(){}
 
     public String getEmployeeName() {
         return employeeName;
@@ -35,21 +35,9 @@ public class Schedule {
         this.group = group;
     }
 
-    public Time getStartTime() {
-        return startTime;
-    }
+    public String getShift() { return shift; }
 
-    public void setStartTime(Time startTime) {
-        this.startTime = startTime;
-    }
-
-    public Time getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Time endTime) {
-        this.endTime = endTime;
-    }
+    public void setShift(String shift) { this.shift = shift; }
 
     public String getDay() {
         return day;

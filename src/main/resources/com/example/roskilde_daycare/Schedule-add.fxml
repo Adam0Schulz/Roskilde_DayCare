@@ -41,7 +41,7 @@
                <center>
                   <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="120.0" spacing="30.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label onMouseClicked="#onPupilsClick" prefHeight="17.0" prefWidth="209.0" text="Pupils" textFill="WHITE">
+                        <Label onMouseClicked="#onPupilsClick" prefHeight="17.0" prefWidth="209.0" stylesheets="@CSS/Style.css" text="Pupils" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Bold" size="18.0" />
                            </font>
@@ -60,7 +60,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
-                        <Label onMouseClicked="#onWaitingListClick" prefHeight="17.0" prefWidth="205.0" text="Waiting list" textFill="WHITE">
+                        <Label onMouseClicked="#onWaitingListClick" prefHeight="17.0" prefWidth="205.0" stylesheets="@CSS/Style.css" text="Waiting list" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Bold" size="18.0" />
                            </font>
@@ -68,7 +68,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
-                        <Label onMouseClicked="#onEmployeesClick" prefHeight="17.0" prefWidth="210.0" text="Employees" textFill="WHITE">
+                        <Label onMouseClicked="#onEmployeesClick" prefHeight="17.0" prefWidth="210.0" stylesheets="@CSS/Style.css" text="Employees" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Bold" size="18.0" />
                            </font>
@@ -92,7 +92,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Pane>
-                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #F84E8C; -fx-background-radius: 50px;" text="LOG OUT" textFill="WHITE">
+                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #F84E8C; -fx-background-radius: 50px;" stylesheets="@CSS/Style.css" text="LOG OUT" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Bold" size="14.0" />
                                  </font>
@@ -153,7 +153,7 @@
                         </Label>
                         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="824.0" spacing="21.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #F8AFB4; -fx-background-radius: 50px;" text="CANCEL" textFill="WHITE">
+                              <Button mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #F8AFB4; -fx-background-radius: 50px;" stylesheets="@CSS/Style.css" text="CANCEL" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Bold" size="14.0" />
                                  </font>
@@ -168,7 +168,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button layoutX="690.0" layoutY="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #0075A3; -fx-background-radius: 50px;" text="ADD" textFill="WHITE">
+                              <Button layoutX="690.0" layoutY="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #0075A3; -fx-background-radius: 50px;" stylesheets="@CSS/Style.css" text="ADD" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Bold" size="14.0" />
                                  </font>
@@ -193,30 +193,42 @@
                            <children>
                               <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #FBD3D6; -fx-background-radius: 50px 50px 0 0;">
                                  <children>
-                                    <Label alignment="CENTER" prefHeight="40.0" prefWidth="195.0" style="-fx-background-color: #F84E8C; -fx-background-radius: 50px 50px 50px 0;" text="Monday" textFill="WHITE">
+                                    <Label fx:id="monday_active" alignment="CENTER" onMouseClicked="#onDaySwitch" prefHeight="40.0" prefWidth="195.0" style="-fx-background-color: #F84E8C; -fx-background-radius: 50px 50px 50px 0;" text="Monday" textFill="WHITE">
                                        <font>
                                           <Font name="Segoe UI Semibold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Label alignment="CENTER" prefHeight="40.0" prefWidth="195.0" style="-fx-background-radius: 50px;" text="Tuesday" textFill="#515151">
+                                    <Label fx:id="tuesday_" alignment="CENTER" onMouseClicked="#onDaySwitch" prefHeight="40.0" prefWidth="195.0" style="-fx-background-radius: 50px;" text="Tuesday" textFill="#515151">
                                        <font>
                                           <Font name="Segoe UI Semibold" size="18.0" />
                                        </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </Label>
-                                    <Label alignment="CENTER" prefHeight="40.0" prefWidth="195.0" style="-fx-background-radius: 50px;" text="Wednesday" textFill="#515151">
+                                    <Label fx:id="wednesday_" alignment="CENTER" onMouseClicked="#onDaySwitch" prefHeight="40.0" prefWidth="195.0" style="-fx-background-radius: 50px;" text="Wednesday" textFill="#515151">
                                        <font>
                                           <Font name="Segoe UI Semibold" size="18.0" />
                                        </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </Label>
-                                    <Label alignment="CENTER" prefHeight="40.0" prefWidth="195.0" style="-fx-background-radius: 50px;" text="Thursday" textFill="#515151">
+                                    <Label fx:id="thursday_" alignment="CENTER" onMouseClicked="#onDaySwitch" prefHeight="40.0" prefWidth="195.0" style="-fx-background-radius: 50px;" text="Thursday" textFill="#515151">
                                        <font>
                                           <Font name="Segoe UI Semibold" size="18.0" />
                                        </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </Label>
-                                    <Label alignment="CENTER" prefHeight="40.0" prefWidth="195.0" style="-fx-background-radius: 50px 50px 0 50px;" text="Friday" textFill="#515151">
+                                    <Label fx:id="friday_" alignment="CENTER" onMouseClicked="#onDaySwitch" prefHeight="40.0" prefWidth="195.0" style="-fx-background-radius: 50px 50px 0 50px;" text="Friday" textFill="#515151">
                                        <font>
                                           <Font name="Segoe UI Semibold" size="18.0" />
                                        </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </Label>
                                  </children>
                               </HBox>
@@ -1493,7 +1505,7 @@
                                                                               <Font name="Segoe UI Semibold" size="12.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
+                                                                        <ChoiceBox fx:id="h_mor_1" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
                                                                      </children>
                                                                   </HBox>
                                                                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="279.0" spacing="23.0">
@@ -1503,7 +1515,7 @@
                                                                               <Font name="Segoe UI Semibold" size="12.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
+                                                                        <ChoiceBox fx:id="h_mor_2" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
                                                                      </children>
                                                                   </HBox>
                                                                </children>
@@ -1520,7 +1532,7 @@
                                                                               <Font name="Segoe UI Semibold" size="12.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
+                                                                        <ChoiceBox fx:id="h_aft_1" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
                                                                      </children>
                                                                   </HBox>
                                                                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="279.0" spacing="23.0">
@@ -1530,7 +1542,7 @@
                                                                               <Font name="Segoe UI Semibold" size="12.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
+                                                                        <ChoiceBox fx:id="h_aft_2" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
                                                                      </children>
                                                                   </HBox>
                                                                </children>
@@ -1577,7 +1589,7 @@
                                                                               <Font name="Segoe UI Semibold" size="12.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
+                                                                        <ChoiceBox fx:id="f_mor_1" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
                                                                      </children>
                                                                   </HBox>
                                                                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="279.0" spacing="23.0">
@@ -1587,7 +1599,7 @@
                                                                               <Font name="Segoe UI Semibold" size="12.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
+                                                                        <ChoiceBox fx:id="f_mor_2" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
                                                                      </children>
                                                                   </HBox>
                                                                </children>
@@ -1604,7 +1616,7 @@
                                                                               <Font name="Segoe UI Semibold" size="12.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
+                                                                        <ChoiceBox fx:id="f_aft_1" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
                                                                      </children>
                                                                   </HBox>
                                                                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="279.0" spacing="23.0">
@@ -1614,7 +1626,7 @@
                                                                               <Font name="Segoe UI Semibold" size="12.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
+                                                                        <ChoiceBox fx:id="f_aft_2" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
                                                                      </children>
                                                                   </HBox>
                                                                </children>
@@ -1658,7 +1670,7 @@
                                                                               <Font name="Segoe UI Semibold" size="12.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
+                                                                        <ChoiceBox fx:id="b_mor_1" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
                                                                      </children>
                                                                   </HBox>
                                                                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="279.0" spacing="23.0">
@@ -1668,7 +1680,7 @@
                                                                               <Font name="Segoe UI Semibold" size="12.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
+                                                                        <ChoiceBox fx:id="b_mor_2" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
                                                                      </children>
                                                                   </HBox>
                                                                </children>
@@ -1685,7 +1697,7 @@
                                                                               <Font name="Segoe UI Semibold" size="12.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
+                                                                        <ChoiceBox fx:id="b_aft_1" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
                                                                      </children>
                                                                   </HBox>
                                                                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="33.0" prefWidth="279.0" spacing="23.0">
@@ -1695,7 +1707,7 @@
                                                                               <Font name="Segoe UI Semibold" size="12.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
+                                                                        <ChoiceBox fx:id="b_aft_2" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 50px; -fx-border-color: #DBDBDB;" />
                                                                      </children>
                                                                   </HBox>
                                                                </children>

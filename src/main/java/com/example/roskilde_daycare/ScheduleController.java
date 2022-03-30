@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 
@@ -168,6 +169,18 @@ public class ScheduleController extends CustomStage {
     @FXML
     protected void onAddButtonClick(ActionEvent event){
         DB_Connector.changeScene(event, "Schedule-add.fxml", "New Schedule");
+    }
+
+    @FXML
+    protected void onSubmitAddButtonClick(ActionEvent event) {
+        if(assignments.size() == 60) {
+            DB_Connector.addEmployeeAssignments(assignments);
+            assignments.clear();
+            DB_Connector.changeScene(event, "Schedule-add.fxml", "New Schedule");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING,"Please fill out every choice field :)");
+            alert.show();
+        }
     }
 
     @FXML

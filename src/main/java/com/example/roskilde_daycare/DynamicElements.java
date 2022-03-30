@@ -126,7 +126,7 @@ public class DynamicElements {
 
         // adding controls to control box
         controlBox.setAlignment(Pos.BOTTOM_RIGHT);
-        controlBox.setSpacing(20);
+        controlBox.setSpacing(10);
 
         Button removeBtn = new Button();
         removeBtn.setText("REMOVE");
@@ -177,6 +177,8 @@ public class DynamicElements {
         editBtn.setPrefWidth(130);
         editBtn.setPrefHeight(20);
 
+
+
         if(!(DB_Connector.getCurrentUser().equals("Sandra Madsen"))) {
             editBtn.setDisable(true);
             removeBtn.setDisable(true);
@@ -184,6 +186,15 @@ public class DynamicElements {
 
         controlBox.getChildren().add(editBtn);
         controlBox.getChildren().add(removeBtn);
+        /*if(object.equals("Queuer")) {
+            Button transferBtn = new Button();
+            editBtn.setText("TRANSFER");
+            editBtn.setId("transfer");
+            editBtn.setStyle("-fx-background-color: #AADEEE; -fx-background-radius: 50px; -fx-text-fill: white; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 14px");
+            editBtn.setPrefWidth(130);
+            editBtn.setPrefHeight(20);
+            controlBox.getChildren().add(transferBtn);
+        }*/
 
 
         labelBox.getChildren().add(dataBox);

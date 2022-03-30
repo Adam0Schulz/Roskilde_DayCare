@@ -46,7 +46,8 @@ public class PupilsController extends CustomStage {
             if(searchResult.size() > 0) {
                 pupils = searchResult;
             } else {
-                System.out.println("zero search results");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Zero pupils found :( Sorry");
+                alert.show();
             }
         }
 

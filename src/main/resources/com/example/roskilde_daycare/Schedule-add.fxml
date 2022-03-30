@@ -161,7 +161,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button layoutX="690.0" layoutY="40.0" mnemonicParsing="false" onMouseEntered="#onHover" onMouseExited="#onUnhover" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #0075A3; -fx-background-radius: 50px;" stylesheets="@CSS/Style.css" text="ADD" textFill="WHITE">
+                              <Button layoutX="690.0" layoutY="40.0" mnemonicParsing="false" onAction="#onSubmitAddButtonClick" onMouseEntered="#onHover" onMouseExited="#onUnhover" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #0075A3; -fx-background-radius: 50px;" stylesheets="@CSS/Style.css" text="ADD" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Bold" size="14.0" />
                                  </font>

@@ -83,7 +83,7 @@
                                     <Insets top="20.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField fx:id="userEmail" onKeyReleased="#handleKeyReleased" promptText="name@surname.com" style="-fx-background-radius: 50px; -fx-background-color: #298BB2; -fx-color: #FFFFFF;">
+                              <TextField fx:id="userEmail" onKeyReleased="#handleKeyReleased" promptText="name@surname.com" style="-fx-background-radius: 50px; -fx-background-color: #298BB2; -fx-color: #FFFFFF; -fx-text-fill: white;">
                                  <VBox.margin>
                                     <Insets bottom="25.0" />
                                  </VBox.margin>
@@ -99,7 +99,7 @@
                                     <Font name="Segoe UI" size="20.0" />
                                  </font>
                               </Label>
-                              <PasswordField fx:id="userPassword" onKeyReleased="#handleKeyReleased" promptText="••••••" style="-fx-background-radius: 50px; -fx-background-color: #298BB2; -fx-color: #FFFFFF;">
+                              <PasswordField fx:id="userPassword" onKeyReleased="#handleKeyReleased" promptText="••••••" style="-fx-background-radius: 50px; -fx-background-color: #298BB2; -fx-color: #FFFFFF; -fx-text-fill: white;">
                                  <font>
                                     <Font name="Segoe UI" size="18.0" />
                                  </font>

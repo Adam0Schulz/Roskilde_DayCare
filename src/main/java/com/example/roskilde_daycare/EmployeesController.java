@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -26,8 +28,8 @@ public class EmployeesController extends CustomStage {
 
     @FXML private Button addButton;
     @FXML private Button createEmployeeBtn;
-
-
+    private String[] search;
+    @FXML private TextField searchField;
     @FXML private TextField firstName;
     @FXML private TextField lastName;
     @FXML private TextField street;
@@ -58,6 +60,16 @@ public class EmployeesController extends CustomStage {
 
         Collection<Employee> employees = DB_Connector.employeeList();
 
+        if(search != null) {
+            Collection<Employee> searchResult = (Collection<Employee>) DB_Connector.search("Employee", search[0], search[1]);
+            if(searchResult.size() > 0) {
+                employees = searchResult;
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Zero employees found :( Sorry");
+                alert.show();
+            }
+        }
+
         for(Employee employee : employees) {
             list.add(DynamicElements.createListItem("Employee",employee.getAttributeArray(), employee.getAllAttributeArray(), false));
         }
@@ -70,6 +82,30 @@ public class EmployeesController extends CustomStage {
         if(EmployeeList != null) {
         EmployeeList.getChildren().addAll(getEmployeeList());
         }
+
+        searchField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if(keyEvent.getCode().equals(KeyCode.ENTER)) {
+                    String searchText = searchField.getText();
+                    if(searchText == "") {
+                        search = null;
+                    } else {
+                        if(searchText.contains(": ")) {
+                            search = searchText.split(": ", 2);
+                        } else {
+                            search = new String[2];
+                            search[0] = "";
+                            search[1] = searchText;
+                        }
+
+                        System.out.println(search[0] + " " + search[1]);
+                    }
+                    EmployeeList.getChildren().setAll(getEmployeeList());
+
+                }
+            }
+        });
     }
 
     @FXML

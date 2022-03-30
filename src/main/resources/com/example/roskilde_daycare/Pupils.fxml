@@ -145,7 +145,7 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="243.0">
                                  <children>
-                                    <TextField fx:id="searchField" maxWidth="-Infinity" minWidth="-Infinity" onMouseEntered="#onHover" onMouseExited="#onUnhover" prefHeight="35.0" prefWidth="378.0" style="-fx-background-radius: 50px; -fx-background-color: #FFFFFF;">
+                                    <TextField fx:id="searchField" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="378.0" style="-fx-background-radius: 50px; -fx-background-color: #FFFFFF;">
                                        <font>
                                           <Font name="Segoe UI" size="18.0" />
                                        </font>
@@ -224,7 +224,7 @@
                               </HBox>
                               <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="438.0" prefWidth="977.0" style="-fx-border-color: white; -fx-outline: white; -fx-background-color: white;" vbarPolicy="NEVER">
                                  <content>
-                                    <VBox fx:id="PupilList" blendMode="SRC_ATOP" style="-fx-background-color: white;" />
+                                    <VBox fx:id="PupilList" blendMode="SRC_ATOP" prefWidth="977.0" style="-fx-background-color: white;" />
                                  </content>
                               </ScrollPane>
                            </children>

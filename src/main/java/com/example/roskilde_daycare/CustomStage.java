@@ -35,15 +35,6 @@ public class CustomStage {
         stage.close();
     }
 
-    @FXML
-    protected void onMaximizeClick(MouseEvent event) {
-        javafx.stage.Stage stage = (javafx.stage.Stage)((Node)event.getSource()).getScene().getWindow();
-        if( stage.isMaximized() ) {
-            stage.setMaximized(false);
-        } else {
-            stage.setMaximized(true);
-        }
-    }
 
     @FXML
     protected void onMinimizeClick(MouseEvent event) {

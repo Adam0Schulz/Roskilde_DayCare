@@ -1,10 +1,14 @@
 package com.example.roskilde_daycare;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -12,7 +16,8 @@ import java.util.Collection;
 
 public class WaitingListController extends CustomStage {
 
-
+    private String[] search;
+    @FXML private TextField searchField;
     @FXML private VBox WaitingList;
     @FXML private TextField pFName;
     @FXML private TextField pLName;
@@ -31,6 +36,16 @@ public class WaitingListController extends CustomStage {
         ArrayList<VBox> list = new ArrayList<VBox>();
         Collection<Queuer> queuers = DB_Connector.waitingList();
 
+        if(search != null) {
+            Collection<Queuer> searchResult = (Collection<Queuer>) DB_Connector.search("Queuer", search[0], search[1]);
+            if(searchResult.size() > 0) {
+                queuers = searchResult;
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Zero children on waiting list found :( Sorry");
+                alert.show();
+            }
+        }
+
         for(Queuer Queuer : queuers) {
             list.add(DynamicElements.createListItem("queuer",Queuer.getAttributeArray(), Queuer.getParent().getAttributeArray(), true));
         }
@@ -42,6 +57,30 @@ public class WaitingListController extends CustomStage {
         if(WaitingList != null) {
             WaitingList.getChildren().addAll(getWaitingList());
         }
+
+        searchField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if(keyEvent.getCode().equals(KeyCode.ENTER)) {
+                    String searchText = searchField.getText();
+                    if(searchText == "") {
+                        search = null;
+                    } else {
+                        if(searchText.contains(": ")) {
+                            search = searchText.split(": ", 2);
+                        } else {
+                            search = new String[2];
+                            search[0] = "";
+                            search[1] = searchText;
+                        }
+
+                        System.out.println(search[0] + " " + search[1]);
+                    }
+                    WaitingList.getChildren().setAll(getWaitingList());
+
+                }
+            }
+        });
     }
 
     @FXML

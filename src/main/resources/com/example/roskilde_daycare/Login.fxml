@@ -21,29 +21,22 @@
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="100.0">
                      <left>
-                        <ImageView fitHeight="150.0" fitWidth="13.0" onMouseClicked="#onCloseClick" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                        <ImageView fitHeight="150.0" fitWidth="13.0" onMouseClicked="#onCloseClick" onMouseEntered="#onHover" onMouseExited="#onUnhover" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                            <image>
                               <Image url="@img/ios-close-white.png" />
                            </image>
                         </ImageView>
                      </left>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
                      <center>
-                        <ImageView fitHeight="150.0" fitWidth="13.0" onMouseClicked="#onMaximizeClick" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                           <image>
-                              <Image url="@img/minimize-white.png" />
-                           </image>
-                        </ImageView>
-                     </center>
-                     <right>
-                        <ImageView fitHeight="150.0" fitWidth="13.0" onMouseClicked="#onMinimizeClick" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                        <ImageView fitHeight="150.0" fitWidth="13.0" onMouseClicked="#onMinimizeClick" onMouseEntered="#onHover" onMouseExited="#onUnhover" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                            <image>
                               <Image url="@img/window-minimize-white.png" />
                            </image>
                         </ImageView>
-                     </right>
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
+                     </center>
                   </BorderPane>
                </children>
             </HBox>
@@ -119,7 +112,7 @@
                      </center></BorderPane>
                   <BorderPane prefHeight="108.0" prefWidth="1327.0">
                      <center>
-                        <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#onLoginClick" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: #AADEEE; -fx-background-radius: 50px;" text="Login" textFill="WHITE" BorderPane.alignment="CENTER">
+                        <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#onLoginClick" onMouseEntered="#onHover" onMouseExited="#onUnhover" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: #AADEEE; -fx-background-radius: 50px;" text="Login" textFill="WHITE" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>

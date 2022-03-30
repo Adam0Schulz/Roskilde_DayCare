@@ -78,6 +78,20 @@ public class CustomStage {
         alert.show();
     }
 
+    @FXML
+    protected void onHover(MouseEvent event) {
+        Node node = (Node) event.getSource();
+        node.setScaleX(1.1);
+        node.setScaleY(1.1);
+    }
+
+    @FXML
+    protected void onUnhover(MouseEvent event) {
+        Node node = (Node) event.getSource();
+        node.setScaleX(1);
+        node.setScaleY(1);
+    }
+
 
 
 

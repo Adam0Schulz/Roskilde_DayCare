@@ -40,7 +40,7 @@
                <center>
                   <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="120.0" spacing="30.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label onMouseClicked="#onPupilsClick" prefHeight="17.0" prefWidth="209.0" text="Pupils" textFill="WHITE">
+                        <Label onMouseClicked="#onPupilsClick" onMouseEntered="#onHover" onMouseExited="#onUnhover" prefHeight="17.0" prefWidth="209.0" text="Pupils" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Bold" size="18.0" />
                            </font>
@@ -51,7 +51,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
-                        <Label onMouseClicked="#onScheduleClick" prefHeight="17.0" prefWidth="210.0" styleClass="active_subHeading" stylesheets="@CSS/Style.css" text="Schedule" textFill="WHITE">
+                        <Label onMouseClicked="#onScheduleClick" onMouseEntered="#onHover" onMouseExited="#onUnhover" prefHeight="17.0" prefWidth="210.0" styleClass="active_subHeading" stylesheets="@CSS/Style.css" text="Schedule" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Bold" size="18.0" />
                            </font>
@@ -59,7 +59,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
-                        <Label onMouseClicked="#onWaitingListClick" prefHeight="17.0" prefWidth="205.0" text="Waiting list" textFill="#0075a3">
+                        <Label onMouseClicked="#onWaitingListClick" onMouseEntered="#onHover" onMouseExited="#onUnhover" prefHeight="17.0" prefWidth="205.0" text="Waiting list" textFill="#0075a3">
                            <font>
                               <Font name="Segoe UI Bold" size="18.0" />
                            </font>
@@ -67,7 +67,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
-                        <Label onMouseClicked="#onEmployeesClick" prefHeight="17.0" prefWidth="210.0" text="Employees" textFill="WHITE">
+                        <Label onMouseClicked="#onEmployeesClick" onMouseEntered="#onHover" onMouseExited="#onUnhover" prefHeight="17.0" prefWidth="210.0" text="Employees" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Bold" size="18.0" />
                            </font>
@@ -91,7 +91,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Pane>
-                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #F84E8C; -fx-background-radius: 50px;" text="LOG OUT" textFill="WHITE">
+                              <Button mnemonicParsing="false" onMouseEntered="#onHover" onMouseExited="#onUnhover" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #F84E8C; -fx-background-radius: 50px;" text="LOG OUT" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Bold" size="14.0" />
                                  </font>
@@ -113,29 +113,22 @@
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="100.0">
                      <left>
-                        <ImageView fitHeight="150.0" fitWidth="13.0" onMouseClicked="#onCloseClick" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                        <ImageView fitHeight="150.0" fitWidth="13.0" onMouseClicked="#onCloseClick" onMouseEntered="#onHover" onMouseExited="#onUnhover" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                            <image>
                               <Image url="@img/ios-close.png" />
                            </image>
                         </ImageView>
                      </left>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
                      <center>
-                        <ImageView fitHeight="150.0" fitWidth="13.0" onMouseClicked="#onMaximizeClick" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                           <image>
-                              <Image url="@img/minimize.png" />
-                           </image>
-                        </ImageView>
-                     </center>
-                     <right>
-                        <ImageView fitHeight="150.0" fitWidth="13.0" onMouseClicked="#onMinimizeClick" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                        <ImageView fitHeight="150.0" fitWidth="13.0" onMouseClicked="#onMinimizeClick" onMouseEntered="#onHover" onMouseExited="#onUnhover" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                            <image>
                               <Image url="@img/window-minimize.png" />
                            </image>
                         </ImageView>
-                     </right>
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
+                     </center>
                   </BorderPane>
                </children>
             </HBox>
@@ -152,7 +145,7 @@
                         </Label>
                         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="824.0" spacing="22.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #F8AFB4; -fx-background-radius: 50px;" text="CANCEL" textFill="WHITE">
+                              <Button mnemonicParsing="false" onAction="#onCancelButtonClick" onMouseEntered="#onHover" onMouseExited="#onUnhover" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #F8AFB4; -fx-background-radius: 50px;" text="CANCEL" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Bold" size="14.0" />
                                  </font>
@@ -167,7 +160,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button layoutX="630.0" layoutY="40.0" mnemonicParsing="false" onAction="#onCreateChildButtonClick" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #0075A3; -fx-background-radius: 50px;" text="ADD" textFill="WHITE">
+                              <Button layoutX="630.0" layoutY="40.0" mnemonicParsing="false" onAction="#onCreateChildButtonClick" onMouseEntered="#onHover" onMouseExited="#onUnhover" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #0075A3; -fx-background-radius: 50px;" text="ADD" textFill="WHITE">
                                  <font>
                                     <Font name="Segoe UI Bold" size="14.0" />
                                  </font>
